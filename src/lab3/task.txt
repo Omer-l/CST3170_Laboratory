@@ -1,0 +1,8 @@
+Here is the lense data from the UCI benchmark, and the description if you're interested.
+Make a decision tree the correctly categorises the first four items. (The first four features are the inputs, and the last is the category.)
+Allow the user to put in the item they're trying to categorise by inputing the 4 features; output the category.
+If you'd like make a complete tree.
+Use the C4.5 algorithm to make a good decision tree.
+Implement the C4.5 algorithm to automatically learn the decision tree.
+Split the data in half (say odds and evens). Learn the tree from the first half and categorise the second half. How well do you do?
+Now do the second fold.

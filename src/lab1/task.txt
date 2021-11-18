@@ -1,0 +1,18 @@
+Open up Eclipse.
+Make a new java hello world program.
+Now we're going to play with arrays.
+First, make a 1 dimensional array.
+Fill it up via definition (int []arr = {3,4,2};)
+Print it out.
+Now, make a 1 dimensional array with 10 items.
+Fill it up with a for loop.
+Can you do the first 10 odd numbers?
+Print it out.
+Now try a 2D array of integers. Let's make it 2x100;
+Fill it up with a loop.
+Put the init in a function, and call it from the main.
+Make a print function too, and call it.
+Make a function that sorts based on the first number.
+Print the result.
+Make a function that sorts based on the second number.
+Print it.

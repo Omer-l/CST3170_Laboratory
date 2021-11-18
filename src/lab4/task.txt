@@ -1,0 +1,12 @@
+Remember the problem; there are 3 missionaries and 3 cannibals on one side of the river. They have a canoe that seats at most 2, and they need to get to the other side of the river. If the cannibals ever outnumber the missionaries on either side of the river they eat them, and you lose.
+Make a java system that has the position of the cannibals, missionaries and boat.
+Make an interface that allows the user to choose how many missionaries and cannibals to move. (Text is fine.)
+Make the checks that the system works, with failure if the cannibals eat the missionaries.
+Now add depth first search.
+Have the system propose all the options from the start state.
+Print out the state as you go.
+Have it explore each in turn.
+You can use randomness.
+Make sure you avoid revisiting states unnecessarily.
+Print out the correct solution.
+Print out the full reachable state space.
