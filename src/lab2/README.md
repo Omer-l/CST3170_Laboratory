@@ -28,9 +28,9 @@ A learning line approach.
 
 2. A line is made connecting the two centroids.
 
-3. A perpendicular line to the line connecting the two centroid. This line intersects the point that is the midpoint of the two centroids. 
+3. A perpendicular line intersects the line connecting the two centroid. This line intersects at exactly the midpoint of the two centroids. 
 
-4. This perpendicular line classifies A and B points.
+4. The perpendicular line classifies A and B points.
 
 This approach does not always produce optimal results. Be that as it may, this approach is sufficiently accurate for this dataset.
 
