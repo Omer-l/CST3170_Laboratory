@@ -53,7 +53,7 @@ public class Application4Rows {
 	public static int[][] getData() {
 		int[][] data = new int[SIZE][5];
 		try {
-			Scanner input = new Scanner(new File("./Resources/lenseData"));
+			Scanner input = new Scanner(new File("./Resources/lenseData.txt"));
 			int count = 0;
 			while (input.hasNext() && count < 4) {
 

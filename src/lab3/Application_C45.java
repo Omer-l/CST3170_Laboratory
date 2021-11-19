@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Application_C45 {
 
 	//* PLACE DATA FILES IN 'Resources' FOLDER.INPUT FILE NAME AFTER THE LAST '/' OF THIS LINE.
-	private static File file = new File(System.getProperty("user.dir") + "/Resources/lenseData");
+	private static File file = new File(System.getProperty("user.dir") + "/Resources/lenseData.txt");
 
 	public static void main(String[] args) {
 		
