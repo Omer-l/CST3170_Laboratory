@@ -1,8 +1,0 @@
-Build a system that learns a linear classifier given data.
-Make a new java project.
-Put in an array of 2D points in two categories; the category can be represented by a third integer point.
-Make a line that separates them. Remember, a line can be represented many ways including by two points, and by the equation x=my+b (where m is the slope constant and b is the offset from the origin).
-In response to data, move the line. You can try the perceptron leaarning rule, or just move it gradually.
-Try it with this data file.
-Try it with this data file.
-Can you make a plane for 3D?
