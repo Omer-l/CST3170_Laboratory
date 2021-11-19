@@ -3,7 +3,7 @@ package lab1;
 import java.util.Arrays;
 
 public class Application {
-	public final static int ROWS = 500;
+	public final static int ROWS = 30;
 	public final static int COLUMNS = 7;
 	
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class Application {
     	
         for(int y = 0; y < ROWS; y++)
             for(int x = 0; x < COLUMNS; x++)
-                arr[y][x] = (int)(Math.random() * 100);
+                arr[y][x] = (int)(Math.random() * ROWS);
         
         return arr;
     }
