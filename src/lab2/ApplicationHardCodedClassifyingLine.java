@@ -7,8 +7,8 @@ public class ApplicationHardCodedClassifyingLine {
 		Line classifyingLine; //line that separates the A's and B's in the data file.
 
 		System.out.println("-------------------\nLINE CLASS 1\n-------------------");
-		point1 = new PointLab2(-1, -1);
-		point2 = new PointLab2(8, 5);
+		point1 = new PointLab2(3, 0);
+		point2 = new PointLab2(4, 6);
 		classifyingLine = new Line(point1, point2);
 		readDataAndPrintPoints("lineClass1.txt");
 		System.out.println(classifyingLine + "\n Connected these two hardcoded points: " + point1 + " and " + point2);
