@@ -14,8 +14,8 @@ public class ApplicationHardCodedClassifyingLine {
 		System.out.println(classifyingLine + "\n Connected these two hardcoded points: " + point1 + " and " + point2);
 
 		System.out.println("\n-------------------\nLINE CLASS 2\n-------------------");
-		point1 = new PointLab2(0, -1);
-		point2 = new PointLab2(5, 2);
+		point1 = new PointLab2(-20, -13);
+		point2 = new PointLab2(45, 26);
 		classifyingLine = new Line(point1, point2);
 		readDataAndPrintPoints("lineClass2.txt");
 		System.out.println(classifyingLine + "\n Connected these two hardcoded points: " + point1 + " and " + point2);
