@@ -2,7 +2,7 @@
 
 A 2D array of integers and a function that iteratively sorts based on the column number and prints the sorted array
 
-Below is an example of the output of ordering one column
+Below is an example of the output of sorting the arrays by the 1st column.
 
 ----------------------------
 ## ORDER COLUMN NUMBER 1
@@ -28,7 +28,7 @@ Below is an example of the output of ordering one column
 [16, 3, 0, 22, 23, 22, 15] <br/>
 [19, 9, 29, 6, 6, 5, 21]   <br/>
 [19, 29, 17, 7, 16, 13, 19]<br/>
-[20, 10, 21, 13, 13, 23, 10<br/>]
+[20, 10, 21, 13, 13, 23, 10] <br/>
 [21, 20, 12, 3, 8, 14, 7]  <br/>
 [22, 15, 13, 2, 25, 6, 5]  <br/>
 [22, 18, 9, 17, 14, 27, 18]<br/>
