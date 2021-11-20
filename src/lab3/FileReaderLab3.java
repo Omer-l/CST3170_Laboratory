@@ -19,10 +19,11 @@ public class FileReaderLab3 extends MyFileReader {
 
     /**
      * This function gets the data that each line 'lineClass1.txt' contains
+     * @return  an array, for which, each row of the array is a training set.
      */
     public int[][] getData() {
 
-        int[][] lensesData = new int[getNumberOfLines()][getNumberOfColumns()]; //columns are the features.
+        int[][] lensesData = new int[getNumberOfLines()][getNumberOfColumns() - 1]; //columns are the features. Also, -1 because one column is the index of the row.
 
         int rowIterator = 0;
 
@@ -31,6 +32,7 @@ public class FileReaderLab3 extends MyFileReader {
 
             while (input.hasNext()) {
                 String[] bits = input.nextLine().split(" ");
+                bits[0] = " "; //turns into a space to avoid parsing row number as a class of a feature.
                 int columnIterator = 0;
                 for(String bit : bits) {
                     bit = bit.trim(); //trim bit to get true length. is there a digit?

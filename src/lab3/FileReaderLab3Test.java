@@ -10,7 +10,7 @@ class FileReaderLab3Test {
     void getNumberOfColumns() {
         FileReaderLab3 fileReader = new FileReaderLab3("lenseData.txt");
 
-        int expectedNumberOfColumns = 6;
+        int expectedNumberOfColumns = 5;
         int actualNumberOfColumns = fileReader.getNumberOfColumns();
 
         assertEquals(expectedNumberOfColumns, actualNumberOfColumns);
