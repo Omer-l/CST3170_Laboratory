@@ -36,7 +36,7 @@ public class Application {
     }
 
     /**
-     * This function gets the features in lenseData.txt
+     * This function gets the features from an array of features and category
      * @param featuresAndCategory		an array of features (including category, which will be excluded).
      * @return							returns a 2D array, the rows in the array represent the columns in the table lenseData.txt
      */
@@ -49,7 +49,7 @@ public class Application {
     }
 
     /**
-     * This function gets the category column (AKA LAST COLUMN) in lenseData.txt
+     * This function gets the category column (AKA LAST COLUMN) from an array of features and category
      * @param featuresAndCategory		an array of features (which will be excluded) and including category which will be excluded.
      * @return							returns a 2D array, the rows in the array represent the columns in the table lenseData.txt
      */
