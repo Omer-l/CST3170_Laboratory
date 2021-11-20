@@ -1,19 +1,17 @@
 package lab3;
 
-import java.util.ArrayList;
+import org.junit.Assert;
 
 class TreeNodeTest {
 
     @org.junit.jupiter.api.Test
-    public void getRoot() {
-        TreeNode<String> treeNode1 = new TreeNode<>("F1");
-        TreeNode<String> node2 = new TreeNode<>("1");
-        ArrayList<TreeNode<String>> children = new ArrayList<>();
-        children.add(treeNode1);
-        children.add(node2);
+    public void getChildren() {
+        TreeNode<String> treeNode1 = new TreeNode<>("F4");
+        TreeNode<String> treeNode2 = new TreeNode<>("F3", treeNode1);
 
-        TreeNode<String> node2Child1 = new TreeNode<>("F2");
-        node2.getChildren().add(node2Child1);
+        String expected = "F3";
+        String actual = treeNode1.getChildren().get(0).getData();
+        Assert.assertEquals(expected, actual);
     }
 
 }

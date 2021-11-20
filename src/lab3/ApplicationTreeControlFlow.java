@@ -1,12 +1,12 @@
 package lab3;
 
-public class Application_Hard_Coded_Tree {
+public class ApplicationTreeControlFlow {
 
 	public static void main(String[] args) {
-		
-		int[] expectedCategory = { 3, 2, 3, 1, 3, 2, 3, 1, 3, 2, 3, 1, 3, 2, 3, 3, 3, 3, 3, 1, 3, 2, 3, 3, };
-		
-		for(int i : expectedCategory)
+		FileReaderLab3 fileReader = new FileReaderLab3("lenseData.txt");
+		DecisionTableRenderer decisionTable = new DecisionTableRenderer(fileReader.getData()); //render in the data.
+
+		for(int i : decisionTable.getCategories())
 			if(i == 1)
 				System.out.println("hard");
 			else if(i == 2)
