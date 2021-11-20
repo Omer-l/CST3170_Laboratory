@@ -18,11 +18,11 @@ public class Categoriser {
 	 * This function evaluates a feature and returns the categories that the inputs of the feature led to.
 	 * @return					an array depicting the number of times a category class appeared for each input type of the feature.
 	 */
-	public int[][] getCategoryOfInputsForFeature(int featureNumber) {
+	public int[][] getCategoryOfInputsForFeature(DecisionTableRenderer decisionTable, int featureNumber) {
 		int[] featureInputs = featuresInputs[featureNumber];
 
-		int numberOfInputsTypes = Application.getNumberOfInputTypesInColumn(featureInputs);
-		int numberOfCategoryTypes = Application.getNumberOfInputTypesInColumn(categories);
+		int numberOfInputsTypes = decisionTable.getNumberOfInputTypesInColumn(featureInputs);
+		int numberOfCategoryTypes = decisionTable.getNumberOfInputTypesInColumn(categories);
 
 		//holds the categories of each input in the feature.
 		int[][] categoryInputsLedTo = new int[numberOfInputsTypes][numberOfCategoryTypes];
