@@ -11,12 +11,11 @@ public class Application {
         int[][] featuresInputs = decisionTable.getFeaturesInputs();
         int[] categories = decisionTable.getCategories();
 
-        Pruner pruner = new Pruner(featuresInputs, categories);
+        MeasurerOfGoodness measurerOfGoodness = new MeasurerOfGoodness(featuresInputs, categories);
 
-        for(int featureIterator = 0; featureIterator < featuresInputs.length-1; featureIterator++) {
-            int[][] categoryOfInputs = pruner.getCategoryOfInputsForFeature(decisionTable, featureIterator);
-            System.out.println("FEATURE NUMBER: " + (featureIterator+1) + "\n" + Arrays.deepToString(categoryOfInputs));
-        }
+        for(int[][] result : measurerOfGoodness.getCountOfClassesOfFeatureInputs())
+            System.out.println(Arrays.deepToString(result));
     }
+
 
 }

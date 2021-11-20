@@ -45,18 +45,5 @@ public class DecisionTableRenderer {
         return categories;
     }
 
-    /**
-     * This function gets the number of possible inputs of a column. i.e. column 1 (AKA feature 1) has 3 possible inputs, '1', '2', '3'
-     * @param columnInputs		column's input.
-     * @return					the possible values the inputs can go up to in the column/ feature.
-     */
-    protected int getNumberOfInputTypesInColumn(int[] columnInputs) {
-        int numberOfInputs = 2; //the input is 1 or 2 at least.
 
-        for(int inputOfFeature : columnInputs)
-            if(inputOfFeature > numberOfInputs)
-                numberOfInputs++; //i.e. column 1 has 3 inputs.
-
-        return numberOfInputs;
-    }
 }
