@@ -2,7 +2,7 @@ package lab5;
 
 import java.util.Arrays;
 
-public class ApplicationLab5 {
+public class ApplicationSumDigits {
 	private final static int SIZE = 30;
 	private final static int NUMBER_OF_DIGITS = 100;
 	private final static int PROBABILITY_OF_MUTATION = 3; // 1/100 chance of getting mutated

@@ -3,7 +3,7 @@ package lab5;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class ApplicationLab5_UserInput {
+public class ApplicationUserInput {
 	private final static int SIZE = 40;
 	private final static int PROBABILITY_OF_MUTATION = 3; // 1/100 chance of getting mutated
 	private final static int MAXIMUM_GENERATIONS = 2000;

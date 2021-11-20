@@ -19,15 +19,15 @@ public class ApplicationLabTest {
 		String parent2 = "99502239992905807798"; //112
 		String expectedResult = "94552239992905807798"; //112
 		int crossoverIndex = 4;
-		System.out.println(ApplicationLab5.getSumOfString(expectedResult));
-		assertEquals( "94552239992905807798" ,ApplicationLab5.getCrossover(parent1, parent2, crossoverIndex));
+		System.out.println(ApplicationSumDigits.getSumOfString(expectedResult));
+		assertEquals( "94552239992905807798" , ApplicationSumDigits.getCrossover(parent1, parent2, crossoverIndex));
 	}
 	
 	@Test
 	public void testMutation() {
 		char[] offspringTest = "94555068728873695776".toCharArray();
 		
-		char[] mutated = ApplicationLab5.getMutation(offspringTest, 9);
+		char[] mutated = ApplicationSumDigits.getMutation(offspringTest, 9);
 		assertTrue(!Arrays.equals(offspringTest, mutated));
 	}
 
