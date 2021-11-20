@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-public class ApplicationLabTest {
+public class ApplicationSumDigitsTest {
 
 	@Test
 	public void test() {
