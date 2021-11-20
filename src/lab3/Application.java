@@ -11,9 +11,9 @@ public class Application {
         int[][] featuresInputs = decisionTable.getFeaturesInputs();
         int[] categories = decisionTable.getCategories();
 
-        MeasurerOfGoodness measurerOfGoodness = new MeasurerOfGoodness(featuresInputs, categories);
+        DataSplitter dataSplitter = new DataSplitter(featuresInputs, categories);
 
-        for(int[][] result : measurerOfGoodness.getCountOfClassesOfFeatureInputs())
+        for(int[][] result : dataSplitter.getCountOfClassesOfFeatureInputs())
             System.out.println(Arrays.deepToString(result));
     }
 
