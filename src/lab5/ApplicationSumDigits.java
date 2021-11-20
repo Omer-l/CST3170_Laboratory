@@ -35,7 +35,7 @@ public class ApplicationLab5 {
 	}
 
 	/**
-	 * 
+	 * This function generates a population of genes to start producing offsprings from.
 	 * @return an arbitrarily created population of genes.
 	 */
 	public static String[] generatePopulationOfGenes() {
@@ -60,13 +60,20 @@ public class ApplicationLab5 {
 	}
 
 	/**
-	 * 
+	 * This function gets the index to crossover
 	 * @return a random index to crossover
 	 */
 	public static int getCrossOverIndex() {
 		return (int) (Math.random() * (NUMBER_OF_DIGITS + 1));
 	}
 
+	/**
+	 * This function gets the result from exchanging the two parents' parts from the crossover index.
+	 * @param parent1			best parent 1
+	 * @param parent2			best parent 2
+	 * @param crossoverIndex	index to exchange from
+	 * @return					a new string with a part from both parents
+	 */
 	public static String getCrossover(String parent1, String parent2, int crossoverIndex) {
 
 		String part1Parent1 = parent1.substring(0, crossoverIndex);
@@ -78,7 +85,7 @@ public class ApplicationLab5 {
 	}
 
 	/**
-	 * 
+	 * This function returns an offspring from two parents.
 	 * @param parent1	best parent 1
 	 * @param parent2 	best parent 2.
 	 * @return 			an offspring from the crossover parts of both parents
@@ -93,7 +100,7 @@ public class ApplicationLab5 {
 	}
 
 	/**
-	 * 
+	 * This function generates the next population of genes using two parents.
 	 * @param parent1 best parent 1
 	 * @param parent2 best parent 2.
 	 * @return a generation of genes from two parents.
@@ -110,11 +117,9 @@ public class ApplicationLab5 {
 	}
 
 	/**
-	 * This function gets the two best genes, you can change the if statements in
-	 * the for loop to minimise.
-	 * 
-	 * @param generation a generation of genes
-	 * @return the two best genes to produce an offspring from.
+	 * This function get the two best genes to produce offsprings from depending on MINIMISE.
+	 * @param 	generation a generation of genes
+	 * @return 	the two best genes to produce an offspring from.
 	 */
 	public static int[] getBest2GenesIndexes(String[] generation) {
 		int currentMaximumSum1 = getSumOfString(generation[0]); // best of the best
@@ -161,9 +166,9 @@ public class ApplicationLab5 {
 	}
 
 	/**
-	 * 
-	 * @param offspring gene to mutate
-	 * @return possibly a mutated/different gene.
+	 * This function iterates through each digit and determines whether to mutate the digit.
+	 * @param 	offspring gene to mutate
+	 * @return 	possibly a mutated/different gene.
 	 */
 	public static String mutateOffspring(String offspring) {
 		char[] offspringToCharArray = offspring.toCharArray();
@@ -178,13 +183,16 @@ public class ApplicationLab5 {
 
 	/**
 	 * This function determines whether a digit should be mutated
-	 * 
 	 * @return true if a digit should be mutated.
 	 */
 	public static boolean mutate() {
 		return ((int) (Math.random() * 100) + 1) == PROBABILITY_OF_MUTATION;
 	}
 
+	/**
+	 * This function replaces the given index with a random number 0-9.
+	 * @return gene with a modified digit at the given index.
+	 */
 	public static char[] getMutation(char[] offspring, int indexToMutate) {
 		int randomNumber = (int) (Math.random() * 10);
 		char[] mutation = offspring.clone();
@@ -192,6 +200,11 @@ public class ApplicationLab5 {
 		return mutation;
 	}
 
+	/**
+	 * This function determines whether the best possible result is found. It is generally used for testing purposes.
+	 * @param generation	generation of genes to evaluate
+	 * @return				true if genetic algorithm should be stopped.
+	 */
 	public static boolean finished(String[] generation) {
 		if (MINIMISE)
 			for (int i = 0; i < generation.length; i++) {

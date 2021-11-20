@@ -39,7 +39,7 @@ public class ApplicationLab5_UserInput {
 	}
 
 	/**
-	 * 
+	 * This function takes the user's input and modifies the variables: numberOfDigits and userInput.
 	 * @return size of userInput
 	 */
 	public static int prompt() {
@@ -51,7 +51,7 @@ public class ApplicationLab5_UserInput {
 	}
 
 	/**
-	 * 
+	 * This function generates a population of genes to start producing offsprings from.
 	 * @return an arbitrarily created population of genes.
 	 */
 	public static String[] generatePopulationOfGenes() {
@@ -66,10 +66,10 @@ public class ApplicationLab5_UserInput {
 	}
 
 	/**
-	 * 
-	 * @param userInput desired result
-	 * @param gene      current gene
-	 * @return number of matches at indexes.
+	 * This function gets the number of matches in the gene compared to the user's input (i.e. 2 if 2 of the digits in the genes match).
+	 * @param userInput 	desired result
+	 * @param gene      	current gene
+	 * @return 				number of matches.
 	 */
 	public static int getNumberOfMatches(String userInput, String gene) {
 		int count = 0;
@@ -84,13 +84,20 @@ public class ApplicationLab5_UserInput {
 	
 
 	/**
-	 * 
+	 * This function gets the index to crossover
 	 * @return a random index to crossover
 	 */
 	public static int getCrossOverIndex() {
 		return (int) (Math.random() * (numberOfDigits + 1));
 	}
 
+	/**
+	 * This function gets the result from exchanging the two parents' parts from the crossover index.
+	 * @param parent1			best parent 1
+	 * @param parent2			best parent 2
+	 * @param crossoverIndex	index to exchange from
+	 * @return					a new string with a part from both parents
+	 */
 	public static String getCrossover(String parent1, String parent2, int crossoverIndex) {
 
 		String part1Parent1 = parent1.substring(0, crossoverIndex);
@@ -102,10 +109,10 @@ public class ApplicationLab5_UserInput {
 	}
 
 	/**
-	 * 
-	 * @param parent1 best parent 1
-	 * @param parent2 best parent 2.
-	 * @return an offspring from the crossover parts of both parents
+	 * This function returns an offspring from two parents.
+	 * @param parent1	best parent 1
+	 * @param parent2 	best parent 2.
+	 * @return 			an offspring from the crossover parts of both parents
 	 */
 	public static String getOffspring(String parent1, String parent2) {
 
@@ -116,9 +123,9 @@ public class ApplicationLab5_UserInput {
 		return offspring;
 	}
 
-	
+
 	/**
-	 * 
+	 * This function generates the next population of genes using two parents.
 	 * @param parent1 best parent 1
 	 * @param parent2 best parent 2.
 	 * @return a generation of genes from two parents.
@@ -135,9 +142,9 @@ public class ApplicationLab5_UserInput {
 	}
 
 	/**
-	 * 
-	 * @param generation a generation of genes
-	 * @return the two best genes to produce an offspring from.
+	 * This function gets the two best genes to produce offsprings from.
+	 * @param 	generation 	a generation of genes
+	 * @return 				the two best genes to produce an offspring from.
 	 */
 	public static int[] getBest2GenesIndexes(String[] generation) {
 		int currentMaximumSum1 = getNumberOfMatches(userInput, generation[0]); // best of the best
@@ -164,16 +171,20 @@ public class ApplicationLab5_UserInput {
 
 		return new int[] { currentBestGeneIndex1, currentBestGeneIndex2 };
 	}
-	
+
 	/**
-	 * This function determines whether a digit should be mutated
-	 * 
-	 * @return true if a digit should be mutated.
+	 * This function iterates through each digit and determines whether to mutate the digit.
+	 * @param 	offspring gene to mutate
+	 * @return 	possibly a mutated/different gene.
 	 */
 	public static boolean mutate() {
 		return ((int) (Math.random() * 100) + 1) == PROBABILITY_OF_MUTATION;
 	}
 
+	/**
+	 * This function replaces the given index with a random number 0-9.
+	 * @return gene with a modified digit at the given index.
+	 */
 	public static char[] getMutation(char[] offspring, int indexToMutate) {
 		int randomNumber = (int) (Math.random() * 10);
 		char[] mutation = offspring.clone();
@@ -197,7 +208,11 @@ public class ApplicationLab5_UserInput {
 		return new String(offspringToCharArray);
 	}
 
-
+	/**
+	 * This function determines whether the best possible result is found. It is generally used for testing purposes.
+	 * @param generation	generation of genes to evaluate
+	 * @return				true if genetic algorithm should be stopped.
+	 */
 	public static boolean finished(String[] generation) {
 		for (int i = 0; i < generation.length; i++) {
 			if (getNumberOfMatches(userInput, generation[i]) == numberOfDigits) {
