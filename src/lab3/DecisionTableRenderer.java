@@ -24,7 +24,7 @@ public class DecisionTableRenderer {
 
     /**
      * This function gets the features from an array of features and category
-     * @return							returns a 2D array, the rows in the array represent the columns in the table lenseData.txt
+     * @return	returns a 2D array, the rows in the array represent the columns in the table lenseData.txt
      */
     protected int[][] getFeaturesInputs() {
         int[][] featuresInputs = new int[featuresAndCategory[0].length][featuresAndCategory.length-1]; //take out the category column.

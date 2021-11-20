@@ -2,9 +2,9 @@ package lab3;
 
 import java.util.Arrays;
 
-//This class is used to count and categorise each feature's input in the table (lenseData.txt)
+//This class is used to count and categorise the class of each feature's input in the table
 
-public class Categoriser {
+public abstract class Categoriser {
 
 	private int[][] featuresInputs;
 	private int[] categories;
