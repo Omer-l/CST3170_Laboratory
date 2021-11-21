@@ -24,7 +24,7 @@ The table below represents the topics of each laboratory.
 | 16          | Simple Vision      |    [✅](./src/lab16) |
 | 17          | Utility | [✅](./src/lab17) |
 | 18          | centered      |   [✅](./src/lab18) |
-| 19          | are neat      |    [✅](./src/lab19) |
+| 19          | -     |    |
 | 20          | XML | [✅](./src/lab20) |
 | 21          | Parallel Sort      |   [✅](./src/lab21) |
 | 22          | Rule Based Systems      |    [✅](./src/lab22) |
