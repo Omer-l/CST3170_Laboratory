@@ -8,7 +8,7 @@ A hospital is in need of an automated system that correctly categorises a patien
 
   <img src="README_Images/LenseData.png" heigh=140 width=80>
 
-  i.e. the row '5  1  2  1  1  3'.
+  i.e. row '5  1  2  1  1  3'.
 - '5' is the row's number.
 - The next four numbers '1  2  1  1' are the feature's inputs. Features are the decisions to be made, these are also known as the conditions of the patient.
 - The last number '3' is the category of the row (also known as the result (or class the 4 inputs belong to altogether).
@@ -36,8 +36,8 @@ Below is the result of this approach, the ouput is the lens type required for th
 ## Approach 2: Hard-coded Decision Tree
 
 1. Branches of the tree denote the outcome of the decisions/features.
-2. The branches are hard-coded. This is a very efficient method of finding the lens required for a patient since it breaks down the decisions required to get a lens required for the patient.
-3. Below is a diagram of this approach.
+2. The branches are hard-coded. This is a quicker method of finding the lens required for a patient since it breaks down the decisions and results into a tree data structure. This method can be carried over to the next approach, the C45 algorithm.
+3. Below is a diagram of the hard-coded decision tree.
 4. In the diagram below, 'F' represents a feature and '1','2','3' represent the class/result of the decisions made by the patient.
 5. For instance, the very top branch (the root) contains 'F4', this means Feature 4. If the user decided they had a 'reduced tear production rate' (which is attribute '1'), then 'the patient should not be fitted with contact lenses', this is the left branch from 'F4' (which is '3'). Refer to 'Table 1' for details. 
 
