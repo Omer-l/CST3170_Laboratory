@@ -33,13 +33,13 @@ public class ApplicationHardCodedTree {
     public static int[] prompt(TreeNode<String> decisionTree) {
 
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter the feature 1's input: ");
+        System.out.print("Age of the patient:           (1) young, (2) pre-presbyopic, (3) presbyopic   : ");
         int f1 = input.nextInt()-1;
-        System.out.print("\nEnter the feature 2's input: ");
+        System.out.print("\nSpectacle prescription:       (1) myope, (2) hypermetrope                     : ");
         int f2 = input.nextInt()-1;
-        System.out.print("\nEnter the feature 3's input: ");
+        System.out.print("\nNastigmatic:                  (1) no, (2) yes                                 : ");
         int f3 = input.nextInt()-1;
-        System.out.print("\nEnter the feature 4's input: ");
+        System.out.print("\nTear production rate:         (1) reduced, (2) normal                         : ");
         int f4 = input.nextInt()-1;
 
         int[] decisions = {f1, f2, f3, f4};
@@ -132,14 +132,14 @@ public class ApplicationHardCodedTree {
      */
     public static String categoryToString(int category) {
         StringBuilder sb = new StringBuilder();
-
+        System.out.println("\n------\nResult:\n------");
         if(category == 1)
             sb.append("The patient should be fitted with hard contact lenses");
         else if(category == 2)
             sb.append("The patient should not be fitted with contact lenses");
         else if(category == 3)
             sb.append("The patient should not be fitted with contact lenses");
-
+        sb.append("\n-----------------------------------------------------\n");
         return sb.toString();
     }
 }
