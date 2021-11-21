@@ -4,7 +4,7 @@ The table below represents the topics of each laboratory.
 
   _Kindly click the '✅' for more details such as the approaches made to achieve the 'Topic'_
 
-| Laboratory Week        | Topic         | Implemented in 'src' repository? |
+| Laboratory Week        | Topic         | Link to repository |
 | ---------------------- |:------------: | -------------------------------: |
 | 1           | 2D Arrays | [✅](./src/lab1)              |
 | 2           | Linear Categoriser      |        [✅](./src/lab2)          |
