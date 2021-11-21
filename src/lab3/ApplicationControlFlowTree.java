@@ -2,7 +2,7 @@ package lab3;
 
 import java.util.Arrays;
 
-public class ApplicationTreeControlFlow {
+public class ApplicationControlFlowTree {
 
 	public static void main(String[] args) {
 		FileReaderLab3 fileReader = new FileReaderLab3("lenseData.txt");
@@ -49,18 +49,14 @@ public class ApplicationTreeControlFlow {
 		return sb.toString();
 	}
 
-//	public static int[] getCategory(int[][] arr) {
-//
-//		int[] category = new int[arr.length];
-//
-//		for (int i = 0; i < arr.length; i++) {
-//			category[i] = getRowCategory(arr[i]);
-//		}
-//
-//		return category;
-//
-//	}
-
+	/**
+	 * evalutes the class category sequence of features belongs to.
+	 * @param f1	feature 1's input
+	 * @param f2	feature 2's input
+	 * @param f3	feature 3's input
+	 * @param f4	feature 4's input
+	 * @return		class of row.
+	 */
 	public static int getRowCategory(int f1, int f2, int f3, int f4) {
 
 		if (f4 == 1) {

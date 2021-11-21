@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Application_C45 {
+public class ApplicationC45 {
 
 	//* PLACE DATA FILES IN 'Resources' FOLDER.INPUT FILE NAME AFTER THE LAST '/' OF THIS LINE.
 	private static File file = new File(System.getProperty("user.dir") + "/Resources/lenseData.txt");
