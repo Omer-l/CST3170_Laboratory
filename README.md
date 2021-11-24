@@ -1,8 +1,8 @@
 # CST3170_Laboratory
+ ## During my third year as an undergraduate, I took a module on Artificial Intelligence.
+Below you can find a table listing the topics of each laboratory. 
 
-The table below represents the topics of each laboratory. 
-
-  _Kindly click the '✅' for more details such as the approaches made to achieve the 'Topic'_
+  _The '✅' will give you more information such as how I approached achieving the 'Topic'_
 
 | Laboratory Week        | Topic         | Link to repository |
 | ---------------------- |:------------: | -------------------------------: |
