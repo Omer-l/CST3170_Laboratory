@@ -1,6 +1,12 @@
 # CST3170_Laboratory
- ## During my third year as an undergraduate, I took a module on Artificial Intelligence.
-Below you can find a table listing the topics of each laboratory. 
+ ### During my third year as an undergraduate, I took a module on Artificial Intelligence.
+ 
+ Artificial Intelligence (AI) Laboratory (CST3170)
+-	Utilised the ID3 algorithm and a dataset to split a decision tree in a way to categorise a patient with the correct lens type for their eyes.
+-	Implemented linear categorisers, self-organising maps, state-space search (missionaries and cannibals’ problem), and case-based reasoning (Euclidean distances, k-nearest neighbours) algorithms thus far.
+-	<b>Leveraged Knowledge:</b> In AI, categorisers, deep neural nets, concepts of linear algebra and calculus.
+
+<b>Below you can find a table listing the topics of each laboratory. </b>
 
   _The '✅' will give you more information such as how I approached achieving the 'Topic'_
 
