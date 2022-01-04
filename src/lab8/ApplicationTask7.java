@@ -1,11 +1,13 @@
+package lab8;
+
 import java.util.Arrays;
 
-public class Application_UpToTask7 {
+public class ApplicationTask7 {
 	private final static int ROWS = 10;
 	private final static int COLUMNS = 2; // x and a y
 	private static boolean learningRateZero = false; //whence the points are all equivalent to the points before them.
 	private static double[][] nodesFromBefore;
-	private static double minimumLearningRate = 0.5;
+	private final static double minimumLearningRate = 0.5;
 	private static double[] allLearningRates = new double[ROWS]; //keeps track of all the learning rates.
 	private static boolean[] allLearningRatesMinimum = new boolean[ROWS]; //keeps track of all the learning rates.
 	
@@ -33,8 +35,8 @@ public class Application_UpToTask7 {
 	
 	/**
 	 * This function returns true if the new
-	 * @param dataPointFromBefore
-	 * @param dataPointFromAfter
+	 * @param 	dataPointFromBefore
+	 * @param 	dataPointFromAfter
 	 * @return
 	 */
 	protected boolean atMinimumLearningRate(double dataPointFromBefore, double dataPointFromAfter) {
@@ -45,9 +47,12 @@ public class Application_UpToTask7 {
 		else
 			return false;
 	}
-	
+
+	/**
+	 * will return true if all points have stopped moving towards the closest point to them.
+	 */
 	protected static boolean allAtMinimumLearningRate() {
-		for(boolean isDataPointMinimumLearningRate : allLearningRates)
+		for(boolean isDataPointMinimumLearningRate : allLearningRatesMinimum)
 			if(!isDataPointMinimumLearningRate)
 				return false;
 		
@@ -56,11 +61,6 @@ public class Application_UpToTask7 {
 
 	/**
 	 * This function generates an array of arbitrary numbers.
-	 * 
-	 * @param rows
-	 *            number of rows
-	 * @param cols
-	 *            number of columns
 	 * @return An array of arbitrary Integers
 	 */
 	public static double[][] generateArbitraryArrayOfIntegers() {
@@ -75,15 +75,10 @@ public class Application_UpToTask7 {
 
 	/**
 	 * This function calculates the euclidian distance for a 2D graph
-	 * 
-	 * @param x1
-	 *            point x1
-	 * @param y1
-	 *            point y1
-	 * @param x2
-	 *            point x2
-	 * @param y2
-	 *            point y2
+	 * @param x1	point x1
+	 * @param y1	point y1
+	 * @param x2	point x2
+	 * @param y2 	point y2
 	 * @return distance between the two points
 	 */
 	public static double getDistanceTo(double x1, double y1, double x2, double y2) {
@@ -94,10 +89,9 @@ public class Application_UpToTask7 {
 	 * This function evaluates the nearest node, it finds the smallest
 	 * difference.
 	 * 
-	 * @param point the point comparing all the other nodes to. the input is an x and y in an array of length 2
-	 * @param indexOfPoint
-	 *            index of the 'point' array in the parameter.
-	 * @return returns the closest node's index
+	 * @param point 		the point comparing all the other nodes to. the input is an x and y in an array of length 2
+	 * @param indexOfPoint 	index of the 'point' array in the parameter.
+	 * @return 				the closest node's index
 	 */
 	public static int getClosestNode(double[][] nodes, double[] point, int indexOfPoint) {
 		// get x and y of point

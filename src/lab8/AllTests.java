@@ -1,3 +1,5 @@
+package lab8;
+
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
@@ -21,7 +23,7 @@ public class AllTests {
 		double[] testPoint = nodes[testPointIndex];
 		
 		int expectedIndex = 3;
-		int actualIndex = Application_UpToTask7.getClosestNode(nodes, testPoint, testPointIndex);
+		int actualIndex = ApplicationTask7.getClosestNode(nodes, testPoint, testPointIndex);
 		
 		assertEquals(expectedIndex, actualIndex);
 	}
@@ -39,7 +41,7 @@ public class AllTests {
 		int testIndexToMoveTo = 4;
 		int testIndexToMove = 0;
 		
-		Application_UpToTask7.moveNodeTowardsPoint(nodes, testIndexToMoveTo, testIndexToMove);
+		ApplicationTask7.moveNodeTowardsPoint(nodes, testIndexToMoveTo, testIndexToMove);
 		
 		double[] expecteds = {2, 2};
 		
