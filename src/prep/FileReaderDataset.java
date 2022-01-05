@@ -1,19 +1,20 @@
 package prep;
 
-import tools.MyFileReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class FileReaderDataset extends MyFileReader{
-	private final int numberOfInputs = 64;
-	private final String delimiter = ",";
+public class FileReaderDataset {
+	private final int numberOfInputs = 64; //number of inputs per line.
+	private final String delimiter = ","; //splits the line to get the inputs and the classification
+	private final File file; //file to read
 
 	public FileReaderDataset(String fileName) {
-		super(fileName);
+		this.file = new File(System.getProperty("user.dir") + "/Resources/" + fileName);
 	}
 	
 	/**
-	 * This function gets the Points that each line 'lineClass1.txt' contains
+	 * This function gets the Row's inputs and classification that for each line
 	 */
 	public Row[] getData() {
 
@@ -41,6 +42,27 @@ public class FileReaderDataset extends MyFileReader{
 		}
 
 		return points;
+	}
+
+	/**
+	 * This function counts the number of lines there are in a file.
+	 * @return number of lines in file.
+	 */
+	public int getNumberOfLines() {
+		int trainingSetsCounter = 0; // counter
+
+		try {
+			Scanner input = new Scanner(file);
+
+			while (input.hasNext()) {
+				input.nextLine();
+				trainingSetsCounter++;
+			}
+		} catch (FileNotFoundException fnfe) {
+			fnfe.printStackTrace();
+		}
+
+		return trainingSetsCounter;
 	}
 
 }
