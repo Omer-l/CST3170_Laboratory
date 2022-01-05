@@ -1,13 +1,24 @@
-package lab12;
+package prep;
 
-public class Row {
+public class DataSet {
 
     private double [] inputs;
     private int classification;
 
-    public Row(double[] inputs, int classification) {
+    public DataSet(double[] inputs, int classification) {
         this.inputs = inputs;
         this.classification = classification;
+    }
+
+    //calculates euclidean distance to another data point/row
+    public double getEuclideanDistanceTo(DataSet otherDataPoint) {
+        double sum = 0;
+
+        //get expression inside square root
+        for(int inputIndex = 0; inputIndex < inputs.length; inputIndex++)
+            sum += Math.pow(this.inputs[inputIndex] - otherDataPoint.inputs[inputIndex], 2);
+
+        return Math.sqrt(sum);
     }
 
     public double[] getInputs() {
@@ -26,9 +37,9 @@ public class Row {
 		this.classification = classification;
 	}
 
-    public static void printPoints(Row[] points) {
-        for (Row row : points)
-            System.out.println(row.toString());
+    public static void printPoints(DataSet[] points) {
+        for (DataSet dataSet : points)
+            System.out.println(dataSet.toString());
     }
 
 	@Override

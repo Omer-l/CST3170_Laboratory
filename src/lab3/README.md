@@ -8,12 +8,12 @@ A hospital is in need of an automated system that correctly categorises a patien
 
   <img src="README_Images/LenseData.png" heigh=140 width=80>
 
-  i.e. row '5  1  2  1  1  3'.
-- '5' is the row's number.
+  i.e. dataSet '5  1  2  1  1  3'.
+- '5' is the dataSet's number.
 - The next four numbers '1  2  1  1' are the feature's inputs. Features are the decisions to be made, these are also known as the conditions of the patient.
-- The last number '3' is the category of the row (also known as the result (or class the 4 inputs belong to altogether).
+- The last number '3' is the category of the dataSet (also known as the result (or class the 4 inputs belong to altogether).
 
-**Table 1 elucidates the example of row number 5 (mentioned above)**
+**Table 1 elucidates the example of dataSet number 5 (mentioned above)**
 
 **Table 1**
 | Feature        | Meaning |                        Attribute information                 | Row 5 |
