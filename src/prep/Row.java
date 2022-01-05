@@ -1,17 +1,17 @@
 package prep;
 
-public class DataSet {
+public class Row {
 
     private double [] inputs;
     private int classification;
 
-    public DataSet(double[] inputs, int classification) {
+    public Row(double[] inputs, int classification) {
         this.inputs = inputs;
         this.classification = classification;
     }
 
     //calculates euclidean distance to another data point/row
-    public double getEuclideanDistanceTo(DataSet otherDataPoint) {
+    public double getEuclideanDistanceTo(Row otherDataPoint) {
         double sum = 0;
 
         //get expression inside square root
@@ -37,9 +37,9 @@ public class DataSet {
 		this.classification = classification;
 	}
 
-    public static void printPoints(DataSet[] points) {
-        for (DataSet dataSet : points)
-            System.out.println(dataSet.toString());
+    public static void printPoints(Row[] points) {
+        for (Row row : points)
+            System.out.println(row.toString());
     }
 
 	@Override

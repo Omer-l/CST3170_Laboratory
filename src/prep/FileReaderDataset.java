@@ -15,9 +15,9 @@ public class FileReaderDataset extends MyFileReader{
 	/**
 	 * This function gets the Points that each line 'lineClass1.txt' contains
 	 */
-	public DataSet[] getData() {
+	public Row[] getData() {
 
-		DataSet[] points = new DataSet[getNumberOfLines()];
+		Row[] points = new Row[getNumberOfLines()];
 		int pointIterator = 0;
 
 		try {
@@ -33,7 +33,7 @@ public class FileReaderDataset extends MyFileReader{
 
 				int classification = Integer.parseInt(bits[bits.length - 1]);
 				
-				points[pointIterator] = new DataSet(inputsForPoint, classification);
+				points[pointIterator] = new Row(inputsForPoint, classification);
 				pointIterator++;
 			}
 		} catch (FileNotFoundException fnfe) {

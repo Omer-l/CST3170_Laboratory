@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class testDataSet {
+public class testRow {
 
 	@Test
 	public void testGetClassifiedPointsA() {
