@@ -7,9 +7,9 @@ public class Application {
     private final static Row[] TESTING_DATA_SETS = testingFileReader.getData(); //test data
 
     public static void main(String[] args) {
-        Euclidean euclidean = new Euclidean(TRAINING_DATA_SETS, TESTING_DATA_SETS);
-        euclidean.run();
-        System.out.println(euclidean);
+        NearestNeighbour nearestNeighbour = new NearestNeighbour(TRAINING_DATA_SETS, TESTING_DATA_SETS);
+        nearestNeighbour.run();
+        System.out.println(nearestNeighbour);
     }
 
 }
