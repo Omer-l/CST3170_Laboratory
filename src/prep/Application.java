@@ -1,5 +1,8 @@
 package prep;
 
+/**
+ * Fukcing Chris this clearly runs the algorithms BITCH
+ */
 public class Application {
     private final static FileReaderDataset trainingFileReader = new FileReaderDataset("dataset1.csv"); //for training file reading
     private final static FileReaderDataset testingFileReader = new FileReaderDataset("dataset2.csv"); //for testing file reading

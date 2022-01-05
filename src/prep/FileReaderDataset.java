@@ -1,13 +1,17 @@
 package prep;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.File; //Getting the File
+import java.io.FileNotFoundException; //In case file is not found
+import java.util.Scanner; //Reading the file
 
+/**
+ * Class for reading in the training and testing dataset files
+ */
 public class FileReaderDataset {
 	private final int numberOfInputs = 64; //number of inputs per line.
 	private final String delimiter = ","; //splits the line to get the inputs and the classification
 	private final File file; //file to read
+	private static final String FILE_NOT_FOUND_ERR = "FILE NOT FOUND";
 
 	public FileReaderDataset(String fileName) {
 		this.file = new File(System.getProperty("user.dir") + "/Resources/" + fileName);
@@ -37,8 +41,9 @@ public class FileReaderDataset {
 				points[pointIterator] = new Row(inputsForPoint, classification);
 				pointIterator++;
 			}
-		} catch (FileNotFoundException fnfe) {
-			fnfe.printStackTrace();
+		} catch (FileNotFoundException fileNotFoundException) {
+			System.out.println(FILE_NOT_FOUND_ERR);
+			fileNotFoundException.printStackTrace();
 		}
 
 		return points;
@@ -58,8 +63,9 @@ public class FileReaderDataset {
 				input.nextLine();
 				trainingSetsCounter++;
 			}
-		} catch (FileNotFoundException fnfe) {
-			fnfe.printStackTrace();
+		} catch (FileNotFoundException fileNotFoundException) {
+			System.out.println(FILE_NOT_FOUND_ERR);
+			fileNotFoundException.printStackTrace();
 		}
 
 		return trainingSetsCounter;
