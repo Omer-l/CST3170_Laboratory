@@ -1,28 +1,24 @@
 package prep;
 
-public class Euclidean {
-    private final Row[] trainingRows;
-    private final Row[] testRows;
-    private int correctClassificationCounter = 0; //counter for correct classifications
-    private int incorrectClassificationCounter = 0;//counter for incorrect classifications
+public class Euclidean extends HandwrittenDigitClassifierAlgorithm{
 
     public Euclidean(Row[] trainingRows, Row[] testRows) {
-        this.trainingRows = trainingRows;
-        this.testRows = testRows;
+        super(trainingRows, testRows);
     }
 
+    @Override
     public void run() {
 
-        for(Row testRow : testRows) {
+        for(Row testRow : getTestRows()) {
             //gets classification based on euclidean distance
             int actualClassificationOfRow = classify(testRow);
             int expectedClassificationOfRow = testRow.getClassification();
 
             //tests whether learning approach gave the right classification.
             if(actualClassificationOfRow == expectedClassificationOfRow)
-                correctClassificationCounter++;
+                add1Correct();
             else
-                incorrectClassificationCounter++;
+                add1Incorrect();
         }
     }
 
@@ -31,6 +27,7 @@ public class Euclidean {
     public int classify(Row newRow) {
         int closestNeighbourIndex = -1;
         double closestNeighbourDistance = Double.MAX_VALUE;
+        Row[] trainingRows = getTrainingRows();
 
         for(int rowIndex = 0; rowIndex < trainingRows.length; rowIndex++) {
             Row neighbour = trainingRows[rowIndex];
@@ -45,10 +42,4 @@ public class Euclidean {
         return trainingRows[closestNeighbourIndex].getClassification();
     }
 
-    @Override
-    public String toString() {
-        //output results
-        double accuracy = ((double)correctClassificationCounter / testRows.length) * 100.00;
-        return "correct: " + correctClassificationCounter + "... incorrect: " + incorrectClassificationCounter + "... = " + accuracy;
-    }
 }
