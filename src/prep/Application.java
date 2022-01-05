@@ -7,7 +7,7 @@ public class Application {
     private final static Row[] TESTING_DATA_SETS = testingFileReader.getData(); //test data
 
     public static void main(String[] args) {
-        NearestNeighbour nearestNeighbour = new NearestNeighbour(TRAINING_DATA_SETS, TESTING_DATA_SETS);
+        NearestNeighbour nearestNeighbour = new NearestNeighbour("Nearest Neighbour", TRAINING_DATA_SETS, TESTING_DATA_SETS);
         nearestNeighbour.run();
         System.out.println(nearestNeighbour);
     }

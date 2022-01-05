@@ -7,8 +7,8 @@ package prep;
  */
 public class NearestNeighbour extends HandwrittenDigitClassifierAlgorithm{
 
-    public NearestNeighbour(Row[] trainingRows, Row[] testRows) {
-        super(trainingRows, testRows);
+    public NearestNeighbour(String algorithmName, Row[] trainingRows, Row[] testRows) {
+        super(algorithmName, trainingRows, testRows);
     }
 
     //runs the algorithm
