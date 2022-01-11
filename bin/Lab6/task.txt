@@ -2,7 +2,7 @@ Make a CBR system for recommending plants for a garden.
 As ever, we will do this in eclipse in Java. Open up a new project. You should probably make it just text mode.
 Define several cases. Let's start by defining the garden by two features, height and width. The output is a third feature a plant.
 For example 5x5 -> holly; 10x10->maple; 20x20-> oak.
-Now make a nearness metric using standard euclidean distance.
+Now make a nearness metric using standard nearestNeighbour distance.
 Test on a hard coded query (e.g. 4x4).
 Now read in the query from the user.
 Now add a third input feature, largest existing shrub or tree.
