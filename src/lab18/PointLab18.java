@@ -110,6 +110,24 @@ public class PointLab18 {
 		return counter;
 	}
 
+    /**
+     * Calculates the dot product of two vectors/points
+     * @param point2    is the other vector/point
+     * @return          dot product of this point and the given point
+     */
+    public double getDotProduct(PointLab18 point2) {
+        double dotProduct = 0;
+
+        for(int featureNumber = 0; featureNumber < features.length; featureNumber++) {
+            double featurePoint1 = features[featureNumber];
+            double featurePoint2 = point2.features[featureNumber];
+
+            dotProduct += (featurePoint1 * featurePoint2);
+        }
+
+        return dotProduct;
+    }
+
     public double getClassification() {
 		return classification;
 	}
