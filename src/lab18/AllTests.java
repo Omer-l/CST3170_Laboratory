@@ -7,13 +7,13 @@ public class AllTests {
 //    FileReaderLab18 fileReader = new FileReaderLab18("SVM_LineClass1.txt");
     FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt");
     PointLab18[] allPoints = fileReader.getData();
-    PointLab18[] A = PointLab18.getClassifiedPoints(allPoints, 10);
-    PointLab18[] B = PointLab18.getClassifiedPoints(allPoints, 20);
+//    PointLab18[] A = PointLab18.getClassifiedPoints(allPoints, 10);
+//    PointLab18[] B = PointLab18.getClassifiedPoints(allPoints, 20);
 
     @Test
     public void getDotProduct() {
         double expected = 5;
-        double actual = Utils.getDotProduct(A[0].getFeatures(), B[0].getFeatures());
+//        double actual = Utils.getDotProduct(A[0].getFeatures(), B[0].getFeatures());
 
 //        assertEquals(expected, actual, 1e-15); SVM_LineClass1.txt
     }
@@ -24,7 +24,7 @@ public class AllTests {
         double y_intercept = -9;
 
         int expected = -1;
-//        int actual = A[0].getHypothesis(gradient, y_intercept);
-//        System.out.println(actual);
+        int actual = Utils.getHypothesis(allPoints[8].getFeatures(), gradient, y_intercept);
+        System.out.println(actual);
     }
 }

@@ -8,8 +8,14 @@ public class Utils {
      * @param y_intercept   is the y-intercept
      * @return              +1 if hypothesis is more than or equal to 0, otherwise returns -1
      */
-    public static int getHypothesis(double[] gradient, double y_intercept) {
-        return -1;
+    public static int getHypothesis(double[] vector, double[] gradient, double y_intercept) {
+        double dotProduct = getDotProduct(vector, gradient);
+        double hypothesisResult = dotProduct + y_intercept;
+
+        if(hypothesisResult >= 0)
+            return 1;
+        else
+            return -1;
     }
 
     /**
