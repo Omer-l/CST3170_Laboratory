@@ -29,7 +29,7 @@
 | 15          | Processing with Neurons      |   [✅](./src/lab15) |
 | 16          | Simple Vision      |    [✅](./src/lab16) |
 | 17          | Utility | [✅](./src/lab17) |
-| 18          | -      |   - |
+| 18          | Support Vector Machines | [✅](./src/lab18) |
 | 19          | -     |  -  |
 | 20          | XML | [✅](./src/lab20) |
 | 21          | Parallel Sort      |   [✅](./src/lab21) |
