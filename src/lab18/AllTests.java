@@ -26,7 +26,7 @@ public class AllTests {
         point[0] = 1; // x_0 = 1;
 
         int expected = -1;
-        double actual = Utils.getHypothesis(allPoints[8].getFeatures(), gradient, y_intercept);
+        double actual = Utils.getHypothesis(allPoints[8].getFeatures(), gradient);
         System.out.println(actual);
     }
 }

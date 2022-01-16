@@ -49,9 +49,8 @@ public class ApplicationPerceptron {
     public static boolean[] perceptronLearningAlgorithm(double[][] X, int[] y) {
         double yIntercept = 5;
         weights = randomiseWeights(yIntercept);
-        double[] hypothesis = initialiseHypothesis(X, weights, yIntercept);//Utils.getHypothesis(X[0], weights, yIntercept);
-        System.out.println(Arrays.toString(hypothesis));
-//        boolean[] misclassifiedExamples = predict(hypothesis, X, y, weights); //indexes of misclassified
+        int[] misclassifiedExamples = predict(X, y, weights); //indexes of misclassified
+        System.out.println(Arrays.toString(misclassifiedExamples));
         System.out.println(Arrays.toString(weights));
         return null;
     }
@@ -67,14 +66,41 @@ public class ApplicationPerceptron {
         return weights;
     }
 
-    private static double[] initialiseHypothesis(double[][] X, double[] weights, double yIntercept) {
-        double[] hypothesis = new double[X.length];
+    private static int[] initialiseHypothesis(double[][] X, double[] weights) {
+        int[] hypothesis = new int[X.length];
 
         for(int pointNumber = 0; pointNumber < X.length; pointNumber++) {
             double[] inputs = X[pointNumber];
-            hypothesis[pointNumber] = Utils.getHypothesis(inputs, weights, yIntercept);
+            hypothesis[pointNumber] = Utils.getHypothesis(inputs, weights);
         }
 
     return hypothesis;
+    }
+
+    private static int[] predict(double[][] X, int[] y, double[] weights) {
+        int[] predict = new int[X.length];
+        int[] hypothesis = initialiseHypothesis(X, weights);
+        System.out.println(Arrays.toString(hypothesis));
+        int numberOfMisclassified = 0;
+        //get number of misclassified
+        for(int predictionNumber = 0; predictionNumber < predict.length; predictionNumber++) {
+            int prediction = hypothesis[predictionNumber];
+            int actual = y[predictionNumber];
+
+            if(prediction != actual)
+                numberOfMisclassified++;
+        }
+
+        //After counting, finally provide the indexes of those misclassified.
+        int[] misclassifiedIndexes = new int[numberOfMisclassified];
+        for(int predictionNumber = 0, misclassifiedIndex = 0; predictionNumber < predict.length; predictionNumber++) {
+            int prediction = hypothesis[predictionNumber];
+            int actual = y[predictionNumber];
+
+            if(prediction != actual)
+                misclassifiedIndexes[misclassifiedIndex++] = predictionNumber;
+        }
+
+        return misclassifiedIndexes;
     }
 }
