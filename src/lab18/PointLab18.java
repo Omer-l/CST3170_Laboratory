@@ -24,7 +24,8 @@ public class PointLab18 {
             double midpointOfFeatures = (featureOfPoint1 + featureOfPoint2) / 2;
             midpoint[featureNumber] = midpointOfFeatures;
         }
-    	return new PointLab18( midpoint, classification);
+        double midpointClassification = (this.classification + point2.classification) / 2;
+    	return new PointLab18( midpoint, midpointClassification);
     }
 
     /**
