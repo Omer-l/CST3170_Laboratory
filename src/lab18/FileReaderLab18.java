@@ -31,11 +31,11 @@ public class FileReaderLab18 extends MyFileReader{
 				String[] bits = fileInput.nextLine().split(",");
 
 				//assigns the features
-				int numberOfFeatures = bits.length - 1; //last column is an output
+				int numberOfFeatures = bits.length; //last column is an output
 				double[] features = new double[numberOfFeatures];
 				for(int  featureNumber = 0; featureNumber < bits.length - 1; featureNumber++) {
 					double feature = Double.parseDouble(bits[featureNumber]);
-					features[featureNumber] = feature;
+					features[featureNumber + 1] = feature;
 				}
 
 				//assigns the classification, the last column

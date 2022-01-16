@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class testLine {
+public class AllTests {
 
 	@Test
 	public void testGetClassifiedPointsA() {
@@ -42,4 +42,8 @@ public class testLine {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	public void test() {
+
+	}
 }

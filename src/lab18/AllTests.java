@@ -20,11 +20,13 @@ public class AllTests {
 
     @Test
     public void getHypothesis() {
-        double[] gradient = {0.4, 1.0};
         double y_intercept = -9;
+        double[] gradient = {y_intercept, 0.4, 1.0}; //w0 = y-intercept
+        double[] point = allPoints[8].getFeatures();
+        point[0] = 1; // x_0 = 1;
 
         int expected = -1;
-        int actual = Utils.getHypothesis(allPoints[8].getFeatures(), gradient, y_intercept);
+        double actual = Utils.getHypothesis(allPoints[8].getFeatures(), gradient, y_intercept);
         System.out.println(actual);
     }
 }

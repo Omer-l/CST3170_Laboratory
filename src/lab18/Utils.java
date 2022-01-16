@@ -4,13 +4,14 @@ public class Utils {
 
     /**
      * Calculates the hypothesis
-     * @param gradient      is the gradient, which is a vector
+     * @param vector        is the inputs, a vector on the graph
+     * @param gradient      is the gradient, which is a vector, AKA weights for perceptron
      * @param y_intercept   is the y-intercept
      * @return              +1 if hypothesis is more than or equal to 0, otherwise returns -1
      */
-    public static int getHypothesis(double[] vector, double[] gradient, double y_intercept) {
+    public static double getHypothesis(double[] vector, double[] gradient, double y_intercept) {
         double dotProduct = getDotProduct(vector, gradient);
-        double hypothesisResult = dotProduct + y_intercept;
+        double hypothesisResult = dotProduct;
 
         if(hypothesisResult >= 0)
             return 1;
