@@ -52,6 +52,13 @@ public class ApplicationPerceptron {
         int[] misclassifiedExamples = predict(X, y, weights); //indexes of misclassified
         System.out.println(Arrays.toString(misclassifiedExamples));
         System.out.println(Arrays.toString(weights));
+
+        while(misclassifiedExamples.length != 0) {
+            int misclassifiedIndex = pickOneFrom(misclassifiedExamples); //chooses a random example.
+            double[] x = X[misclassifiedIndex];
+            yIntercept = y[misclassifiedIndex];
+
+        }
         return null;
     }
 
@@ -102,5 +109,10 @@ public class ApplicationPerceptron {
         }
 
         return misclassifiedIndexes;
+    }
+
+    private static int pickOneFrom(int[] misclassifiedExamples) {
+        int index = (int)(Math.random() * misclassifiedExamples.length); //any
+        return misclassifiedExamples[index];
     }
 }

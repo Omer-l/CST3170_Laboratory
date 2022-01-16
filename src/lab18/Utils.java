@@ -36,5 +36,16 @@ public class Utils {
         return dotProduct;
     }
 
+    public static double[] add1DVectors(double[] vector1, double[] vector2) {
+        double[] result = new double[vector1.length];
 
+        for(int vectorNumber = 0; vectorNumber < vector1.length && vectorNumber < vector2.length; vectorNumber++) {
+            double vectorPoint1 = vector1[vectorNumber];
+            double vectorPoint2 = vector2[vectorNumber];
+
+            result[vectorNumber] = vectorPoint1 + vectorPoint2;
+        }
+
+        return result;
+    }
 }
