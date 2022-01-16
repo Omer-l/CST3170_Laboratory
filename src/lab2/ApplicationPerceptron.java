@@ -56,8 +56,8 @@ public class ApplicationPerceptron {
         while(misclassifiedExamples.length != 0) {
             int misclassifiedIndex = pickOneFrom(misclassifiedExamples); //chooses a random example.
             double[] x = X[misclassifiedIndex];
-            yIntercept = y[misclassifiedIndex];
-
+            int actualClassification = y[misclassifiedIndex];
+            updateWeights(actualClassification, weights, x);
         }
         return null;
     }
@@ -114,5 +114,12 @@ public class ApplicationPerceptron {
     private static int pickOneFrom(int[] misclassifiedExamples) {
         int index = (int)(Math.random() * misclassifiedExamples.length); //any
         return misclassifiedExamples[index];
+    }
+
+    private static void updateWeights(int actualClassification, double[] weights, double[] x) {
+        if(actualClassification == 1) //the angle is larger? than 90 degrees
+            weights = Utils.add1DVectors(weights, x);
+        else
+            weights = Utils.subtract1DVectors(weights, x);
     }
 }
