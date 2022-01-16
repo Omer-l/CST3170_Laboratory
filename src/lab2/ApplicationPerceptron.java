@@ -17,10 +17,10 @@ public class ApplicationPerceptron {
 
     public static void main(String[] args) {
         random.setSeed(230764458418060108L); //always get the same randoms
-        double[][] X = initialiseX();
+        double[][] augmentedX = initialiseX(); //augmented simply means x0 = 1.
         int[] y = initialiseY(); //'A' = 1, 'B' = -1
-        System.out.println(Arrays.deepToString(X) + "\n" + Arrays.toString(y));
-        boolean[] correctlyClassified = perceptronLearningAlgorithm(X, y);
+        System.out.println(Arrays.deepToString(augmentedX) + "\n" + Arrays.toString(y));
+        perceptronLearningAlgorithm(augmentedX, y);
     }
 
     private static double[][] initialiseX() {
@@ -46,20 +46,21 @@ public class ApplicationPerceptron {
         return y;
     }
 
-    public static boolean[] perceptronLearningAlgorithm(double[][] X, int[] y) {
+    public static void perceptronLearningAlgorithm(double[][] X, int[] y) {
         double yIntercept = 5;
         weights = randomiseWeights(yIntercept);
         int[] misclassifiedExamples = predict(X, y, weights); //indexes of misclassified
-        System.out.println(Arrays.toString(misclassifiedExamples));
         System.out.println(Arrays.toString(weights));
 
         while(misclassifiedExamples.length != 0) {
+            System.out.println(Arrays.toString(misclassifiedExamples));
             int misclassifiedIndex = pickOneFrom(misclassifiedExamples); //chooses a random example.
             double[] x = X[misclassifiedIndex];
             int actualClassification = y[misclassifiedIndex];
-            updateWeights(actualClassification, weights, x);
+            weights = updateWeights(actualClassification, weights, x);
+            System.out.println(Arrays.toString(weights));
+            misclassifiedExamples = predict(X, y, weights); //indexes of misclassified
         }
-        return null;
     }
 
     private static double[] randomiseWeights(double yIntercept) {
@@ -116,10 +117,12 @@ public class ApplicationPerceptron {
         return misclassifiedExamples[index];
     }
 
-    private static void updateWeights(int actualClassification, double[] weights, double[] x) {
+    private static double[] updateWeights(int actualClassification, double[] weights, double[] x) {
+        double[] newWeights = new double[weights.length];
         if(actualClassification == 1) //the angle is larger? than 90 degrees
-            weights = Utils.add1DVectors(weights, x);
+            newWeights = Utils.add1DVectors(weights, x);
         else
-            weights = Utils.subtract1DVectors(weights, x);
+            newWeights = Utils.subtract1DVectors(weights, x);
+        return newWeights;
     }
 }
