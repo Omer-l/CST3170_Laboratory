@@ -16,7 +16,7 @@ import java.util.Random;
  * https://www.desmos.com/calculator/ts5eefdf6p
  */
 public class ApplicationPerceptron {
-    private static FileReaderLab18 fileReader = new FileReaderLab18("lineClass1.txt");
+    private static FileReaderLab18 fileReader = new FileReaderLab18("lineClass2.txt");
     private static final PointLab18[] ALL_POINTS = fileReader.getData();
     private static PointLab18[] A = PointLab18.getClassifiedPoints(ALL_POINTS, 'A');
     private static PointLab18[] B = PointLab18.getClassifiedPoints(ALL_POINTS, 'B');
@@ -68,6 +68,8 @@ public class ApplicationPerceptron {
             System.out.println(Arrays.toString(weights));
             misclassifiedExamples = predict(X, y, weights); //indexes of misclassified
         }
+
+        printLineEquation(weights);
     }
 
     private static double[] randomiseWeights(double yIntercept) {
@@ -131,5 +133,20 @@ public class ApplicationPerceptron {
         else
             newWeights = Utils.subtract1DVectors(weights, x);
         return newWeights;
+    }
+
+    private static void printLineEquation(double[] weights) {
+        //weights
+        double w0 = weights[0];
+        double w1 = weights[1];
+        double w2 = weights[2];
+
+        //gradient in latex m=-\frac{\left(\frac{w_{0}}{w_{2}}\right)}{\left(\frac{w_{0}}{w_{1}}\right)}
+        double gradient = -( w0 / w2 ) / ( w0 / w1 );
+
+        //y-intercept
+        double yIntercept = -(w0) / (w2); //-w0/w2
+
+        System.out.println("y = " + gradient + "x" + " + " + yIntercept);
     }
 }
