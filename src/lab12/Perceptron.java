@@ -46,7 +46,6 @@ public class Perceptron {
     }
 
     private double[] randomiseWeights(double yIntercept) {
-        int numberOfFeatures = 3; //x and y and y-intercept
         double[] weights = new double[numberOfFeatures];
         weights[0] = yIntercept;
 

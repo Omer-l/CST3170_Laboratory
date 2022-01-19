@@ -4,18 +4,30 @@ public class Utils {
 
     /**
      * Calculates the hypothesis
-     * @param vector        is the inputs, a vector on the graph
-     * @param gradient      is the gradient, which is a vector, AKA weights for perceptron
-     * @return              +1 if hypothesis is more than or equal to 0, otherwise returns -1
+     * @param augmentedVector           is the inputs, a augmentedVector on the graph where x0 = 1
+     * @param gradient                  is the gradient, which is an augmentedVector, AKA weights for perceptron. w0 = yIntercept initially.
+     * @return                          +1 if hypothesis is more than or equal to 0, otherwise returns -1
      */
-    public static int getHypothesis(double[] vector, double[] gradient) {
-        double dotProduct = getDotProduct(vector, gradient);
-        double hypothesisResult = dotProduct;
-
+    public static int getHypothesis(double[] augmentedVector, double[] gradient) {
+        double dotProductOfWeightsAndVector = getDotProduct(augmentedVector, gradient);
+        double hypothesisResult = dotProductOfWeightsAndVector;
+        System.out.println(hypothesisResult);
         if(hypothesisResult >= 0)
             return 1;
         else
             return -1;
+    }
+
+    /**
+     * The f. To determine how good the line of best fit of the classified data points is.
+     * @param gradient  AKA the weights, the 'm'
+     * @param augmentedVector       The augmented X, including x0 = 1
+     * @param y                     The y-coordinate
+     * @return                      The functional margin points, the higher the better.
+     */
+    public static double getFunctionalMargin(double[] gradient, double[] augmentedVector, double classification) {
+        double dotProductOfWeightsAndVector = getDotProduct(augmentedVector, gradient);
+        return classification * dotProductOfWeightsAndVector;
     }
 
     /**

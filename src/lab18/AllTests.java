@@ -29,4 +29,24 @@ public class AllTests {
         double actual = Utils.getHypothesis(allPoints[8].getFeatures(), gradient);
         System.out.println(actual);
     }
+
+    @Test
+    public void getHypothesis2() {
+        double[] gradient = {8.0, -5.414125490630429, 3.753651706274863}; //w0 = y-intercept
+        double[] point = {1, 4, 1}; //weights * vector + yIntercept = 0, ideally this should be close zero
+
+        int expected = -1;
+        double actual = Utils.getHypothesis(point, gradient);
+        System.out.println(actual);
+    }
+
+    @Test
+    public void getFunctionalMargin() {
+        double[] gradient = {8.0, -5.414125490630429, 3.753651706274863}; //w0 = y-intercept
+        double[] point = {1, 4, 1}; //weights * vector + yIntercept = 0, ideally this should be close zero
+
+        int expected = -1;
+        double actual = Utils.getFunctionalMargin(point, gradient, -1);
+        System.out.println(actual);
+    }
 }
