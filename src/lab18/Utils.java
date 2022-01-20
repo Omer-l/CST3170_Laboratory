@@ -21,13 +21,21 @@ public class Utils {
     /**
      * The f. To determine how good the line of best fit of the classified data points is.
      * @param gradient  AKA the weights, the 'm'
-     * @param augmentedVector       The augmented X, including x0 = 1
-     * @param y                     The y-coordinate
-     * @return                      The functional margin points, the higher the better.
+     * @param augmentedVector       The augmented X, including x0 = 1, Note, this will not be necessary for this calculation
+     * @return                      The functional margin points, the higher, the better.
      */
     public static double getFunctionalMargin(double[] gradient, double[] augmentedVector, double classification) {
-        double dotProductOfWeightsAndVector = getDotProduct(augmentedVector, gradient);
-        return classification * dotProductOfWeightsAndVector;
+        double b = gradient[0];
+        double dotProductOfWeightsAndVector = getDotProductExcludeX0W0(augmentedVector, gradient) + b;
+        return  ( classification * dotProductOfWeightsAndVector );
+    }
+
+    public static double getMagnitude(double[] vector) {
+        double sum = 0;
+        for(double element : vector)
+            sum += element;
+
+        return Math.sqrt(sum);
     }
 
     /**
@@ -40,6 +48,24 @@ public class Utils {
         double dotProduct = 0;
 
         for(int vectorNumber = 0; vectorNumber < vector1.length && vectorNumber < vector2.length; vectorNumber++) {
+            double vectorPoint1 = vector1[vectorNumber];
+            double vectorPoint2 = vector2[vectorNumber];
+
+            dotProduct += (vectorPoint1 * vectorPoint2);
+        }
+        return dotProduct;
+    }
+
+    /**
+     * Calculates the dot product of two vectors/points excludes x_0 and w_0 where x_0 = 1 and w_0 is 'b' or yIntercept
+     * @param vector1       is a vector/point
+     * @param vector2       is a vector/point
+     * @return              dot product of the given vectors
+     */
+    public static double getDotProductExcludeX0W0(double[] vector1, double[] vector2) {
+        double dotProduct = 0;
+
+        for(int vectorNumber = 1; vectorNumber < vector1.length && vectorNumber < vector2.length; vectorNumber++) {
             double vectorPoint1 = vector1[vectorNumber];
             double vectorPoint2 = vector2[vectorNumber];
 
