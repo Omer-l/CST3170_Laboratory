@@ -20,20 +20,22 @@ public class Utils {
 
     /**
      * The f. To determine how good the line of best fit of the classified data points is.
-     * @param gradient  AKA the weights, the 'm'
+     * @param gradient              AKA the weights, the 'm'
      * @param augmentedVector       The augmented X, including x0 = 1, Note, this will not be necessary for this calculation
      * @return                      The functional margin points, the higher, the better.
      */
-    public static double getFunctionalMargin(double[] gradient, double[] augmentedVector, double classification) {
+    public static double getGeometricMargin(double[] gradient, double[] augmentedVector, double classification) {
         double b = gradient[0];
-        double dotProductOfWeightsAndVector = getDotProductExcludeX0W0(augmentedVector, gradient) + b;
-        return  ( classification * dotProductOfWeightsAndVector );
+        double dotProductOfWeightsAndVector = getDotProductExcludeX0W0(augmentedVector, gradient);
+        return (classification / getMagnitudeOrUnitNormalVector(gradient)) * (dotProductOfWeightsAndVector + b);
     }
 
-    public static double getMagnitude(double[] vector) {
+    public static double getMagnitudeOrUnitNormalVector(double[] vector) {
         double sum = 0;
-        for(double element : vector)
-            sum += element;
+        for(int elementIndex = 1; elementIndex < vector.length; elementIndex++) { //starts from 1, excludes 'b'
+            double element = vector[elementIndex];
+            sum += (element * element);
+        }
 
         return Math.sqrt(sum);
     }
@@ -98,5 +100,20 @@ public class Utils {
         }
 
         return result;
+    }
+
+    //Gives equation for 2D weights for a 2D graphs
+    public static void printLineEquation(double[] weights) {
+        //weights
+        double w0 = weights[0];
+        double w1 = weights[1];
+        double w2 = weights[2];
+        //gradient in latex m=-\frac{\left(\frac{w_{0}}{w_{2}}\right)}{\left(\frac{w_{0}}{w_{1}}\right)}
+        double gradient = - ( w0 / w2 ) / ( w0 / w1 );
+
+        //y-intercept
+        double yIntercept = (-w0) / (w2); //-w0/w2
+
+        System.out.println("y = " + gradient + "x" + " + " + yIntercept);
     }
 }

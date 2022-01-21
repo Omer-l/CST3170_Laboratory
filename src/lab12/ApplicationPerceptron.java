@@ -16,7 +16,7 @@ import java.util.Random;
  * https://www.desmos.com/calculator/ts5eefdf6p
  */
 public class ApplicationPerceptron {
-    private static FileReaderLab18 fileReader = new FileReaderLab18("lineClass1.txt");
+    private static FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt");
     private static final PointLab18[] ALL_POINTS = fileReader.getData();
     private static double[] weights;
     private static Random random = new Random(); //for testing purposes
@@ -65,7 +65,7 @@ public class ApplicationPerceptron {
         return y;
     }
 
-    private static void printLineEquation(double[] weights) {
+    public static void printLineEquation(double[] weights) {
         //weights
         double w0 = weights[0];
         double w1 = weights[1];
