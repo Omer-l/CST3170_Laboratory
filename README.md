@@ -12,14 +12,14 @@
 
 | Laboratory Week        | Topic         | Link to repository |
 | ---------------------- |:------------: | -------------------------------: |
-| 1           | 2D Arrays | [✅](./src/lab1)              |
-| 2           | Linear Categoriser      |        [✅](./src/lab2)          |
-| 3           | Categorisation with Decision Trees      |         [✅](./src/lab3)         |
-| 4           | State-Space Search |         [✅](./src/lab4)     |
-| 5           | Genetic Algorithm      |           [✅](./src/lab5)      |
-| 6           | Cased Based Reasoning      |         [✅](./src/lab6)          |
+| 1           | 2D Arrays | [✅](./src/lab01)              |
+| 2           | Linear Categoriser      |        [✅](./src/lab02)          |
+| 3           | Categorisation with Decision Trees      |         [✅](./src/lab03)         |
+| 4           | State-Space Search |         [✅](./src/lab04)     |
+| 5           | Genetic Algorithm      |           [✅](./src/lab05)      |
+| 6           | Cased Based Reasoning      |         [✅](./src/lab06)          |
 | 7           | Prolog Language | [✅](./src/lab7)               |
-| 8           | Self Organising Maps      |        [✅](./src/lab8)         |
+| 8           | Self Organising Maps      |        [✅](./src/lab08)         |
 | 9           | -      |    -               |
 | 10          | -      |    -               |
 | 11          | - | -              |
