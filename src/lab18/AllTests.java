@@ -112,19 +112,40 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
 
     @Test
     public void getGramMatrix() {
-        double[][] points = new double[allPoints.length][allPoints[0].getFeatures().length-1];
-        int iteratorIndex = 0;
-        for(PointLab18 point : allPoints) {
-            double[] pointFeatures = new double[point.getFeatures().length - 1];
-            for (int inputIndex = 1; inputIndex < pointFeatures.length; inputIndex++)
-                pointFeatures[inputIndex - 1] = point.getFeatures()[inputIndex];
-            points[iteratorIndex++] = pointFeatures;
-        }
-        double[][] result = MatrixUtils.getGramMatrix(points);
 
+        double[][] augmentedX = new double[allPoints.length][allPoints[0].getFeatures().length];
+        double[] y = new double[allPoints.length];
+        for (int pointIndex = 0; pointIndex < allPoints.length; pointIndex++) {
+            PointLab18 point = allPoints[pointIndex];
+            augmentedX[pointIndex] = point.getFeatures();
+        }
+
+        for (int i = 0; i < allPoints.length; i++) {
+            y[i] = allPoints[i].getClassification();
+        }
+
+        double[][] result = MatrixUtils.getGramMatrix(augmentedX, y);
+
+        for (int rowIndex = 0; rowIndex < result.length; rowIndex++) {
+            for (int columnIndex = 0; columnIndex < result.length; columnIndex++) {
+                System.out.print(result[rowIndex][columnIndex] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    public void testGetOuterProduct() {
+        double[] y = new double[allPoints.length];
+
+        for (int i = 0; i < allPoints.length; i++) {
+            y[i] = allPoints[i].getClassification();
+        }
+
+        double[][] result = MatrixUtils.getOuterProduct(y, y);
         for(int rowIndex = 0; rowIndex < result.length; rowIndex++) {
-            for (int columnIndex = 1; columnIndex < result.length; columnIndex++) {
-                System.out.print(Arrays.toString(result[0]) + " ");
+            for (int columnIndex = 0; columnIndex < result.length; columnIndex++) {
+                System.out.print(result[rowIndex][columnIndex] + " ");
             }
             System.out.println();
         }
