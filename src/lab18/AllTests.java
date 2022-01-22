@@ -2,18 +2,23 @@ package lab18;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class AllTests {
     //    FileReaderLab18 fileReader = new FileReaderLab18("SVM_LineClass1.txt");
 FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); //https://www.desmos.com/calculator/at8qwz5rsu
 //    FileReaderLab18 fileReader = new FileReaderLab18("lineClass2.txt");
     PointLab18[] allPoints = fileReader.getData();
+//    PointLab18[] allPoints = {
+//
+//    };
 //    PointLab18[] A = PointLab18.getClassifiedPoints(allPoints, 10);
 //    PointLab18[] B = PointLab18.getClassifiedPoints(allPoints, 20);
 
     @Test
     public void getDotProduct() {
         double expected = 5;
-//        double actual = Utils.getDotProduct(A[0].getFeatures(), B[0].getFeatures());
+//        double actual = MatrixUtils.getDotProduct(A[0].getFeatures(), B[0].getFeatures());
 
 //        assertEquals(expected, actual, 1e-15); SVM_LineClass1.txt
     }
@@ -26,7 +31,7 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
         point[0] = 1; // x_0 = 1;
 
         int expected = -1;
-        double actual = Utils.getHypothesis(allPoints[6].getFeatures(), gradient);
+        double actual = MatrixUtils.getHypothesis(allPoints[6].getFeatures(), gradient);
         System.out.println(actual);
     }
 
@@ -36,7 +41,7 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
         double[] point = {1, 4, 1}; //weights * vector + yIntercept = 0, ideally this should be close zero
 
         int expected = -1;
-        double actual = Utils.getHypothesis(point, gradient);
+        double actual = MatrixUtils.getHypothesis(point, gradient);
         System.out.println(actual);
     }
 
@@ -53,13 +58,13 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
         double[] vector = {1, 1, 1};
         double classification = 1;
         double[] grad = {5, 2, 1};
-        System.out.println("HERE: " + Utils.getGeometricMargin(grad, vector, classification));
+        System.out.println("HERE: " + MatrixUtils.getGeometricMargin(grad, vector, classification));
 
 //        double[] t = {7.0, -2.41412549063043, 0.7536517062748631};
 //        double[] v1 = {1, 1, 1};
 //        double[] v2 = {1, 4, 1};
-//        double hyp1 = Utils.getHypothesis(v1, t);
-//        double hyp2 = Utils.getHypothesis(v2, t);
+//        double hyp1 = MatrixUtils.getHypothesis(v1, t);
+//        double hyp2 = MatrixUtils.getHypothesis(v2, t);
 //        double[] gradient = {8.0, -5.414125490630429, 3.753651706274863}; //w0 = y-intercept
         double[][] lineWeights = {
                 {33.0, -1.414125490630429, -4.246348293725138}, //  y = -0.3330215500033507x + 7.771383249170672
@@ -69,9 +74,9 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
                 {44.0, -1.414125490630429, -5.246348293725138}, //  y = -0.2695447216727462x + 8.386785919765549
                 {37.0, -1.4141254906304308, -4.246348293725138}, // y = -0.33302155000335115x + 8.713369097554995
                 {8, -0.4, -1}, //
-        };
+          };
 
-        Utils.printLineEquation(lineWeights[lineWeights.length-1]);
+        MatrixUtils.printLineEquation(lineWeights[lineWeights.length-1]);
         double maximumOfTheMinimumFunctionalMargin = Double.MIN_VALUE;
         int bestHyperplaneIndex = -1;
         for (int lineIndex = 0; lineIndex < lineWeights.length; lineIndex++) {
@@ -85,7 +90,7 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
                 PointLab18 point = allPoints[pointIndex];
                 double[] feature = point.getFeatures();
                 double classificationa = point.getClassification();
-                double functionalMargin = Utils.getGeometricMargin(gradient, feature, classificationa);
+                double functionalMargin = MatrixUtils.getGeometricMargin(gradient, feature, classificationa);
 
                 if (classification == 1 && functionalMargin < minimumFunctionalMarginClass1) {
                     minimumFunctionalMarginClass1 = functionalMargin;
@@ -105,13 +110,23 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
         }
     }
 
-    // (4,1) My: 0.752189896236
-    // (3,3) My: 0.798303200545
-    //AI:
-    // (3,3):    0.540941771358
-    // (6,6):    0.532879911425
     @Test
-    public void getDistanceToSegment() {
+    public void getGramMatrix() {
+        double[][] points = new double[allPoints.length][allPoints[0].getFeatures().length-1];
+        int iteratorIndex = 0;
+        for(PointLab18 point : allPoints) {
+            double[] pointFeatures = new double[point.getFeatures().length - 1];
+            for (int inputIndex = 1; inputIndex < pointFeatures.length; inputIndex++)
+                pointFeatures[inputIndex - 1] = point.getFeatures()[inputIndex];
+            points[iteratorIndex++] = pointFeatures;
+        }
+        double[][] result = MatrixUtils.getGramMatrix(points);
 
+        for(int rowIndex = 0; rowIndex < result.length; rowIndex++) {
+            for (int columnIndex = 1; columnIndex < result.length; columnIndex++) {
+                System.out.print(Arrays.toString(result[0]) + " ");
+            }
+            System.out.println();
+        }
     }
 }

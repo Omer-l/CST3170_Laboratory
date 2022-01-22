@@ -3,7 +3,6 @@ package lab12;
 
 import lab18.FileReaderLab18;
 import lab18.PointLab18;
-import lab18.Utils;
 
 import java.util.Arrays;
 import java.util.Random;

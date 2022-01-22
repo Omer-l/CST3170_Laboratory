@@ -2,8 +2,8 @@ package lab2;
 
 
 import lab18.FileReaderLab18;
+import lab18.MatrixUtils;
 import lab18.PointLab18;
-import lab18.Utils;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -16,7 +16,7 @@ import java.util.Random;
  * https://www.desmos.com/calculator/ts5eefdf6p
  */
 public class ApplicationPerceptron {
-    private static FileReaderLab18 fileReader = new FileReaderLab18("lineClass2.txt");
+    private static FileReaderLab18 fileReader = new FileReaderLab18("lineClass1.txt");
     private static final PointLab18[] ALL_POINTS = fileReader.getData();
     private static PointLab18[] A = PointLab18.getClassifiedPoints(ALL_POINTS, 'A');
     private static PointLab18[] B = PointLab18.getClassifiedPoints(ALL_POINTS, 'B');
@@ -88,7 +88,7 @@ public class ApplicationPerceptron {
 
         for (int pointNumber = 0; pointNumber < X.length; pointNumber++) {
             double[] features = X[pointNumber];
-            hypothesis[pointNumber] = Utils.getHypothesis(features, weights);
+            hypothesis[pointNumber] = MatrixUtils.getHypothesis(features, weights);
         }
 
         return hypothesis;
@@ -129,9 +129,9 @@ public class ApplicationPerceptron {
     private static double[] updateWeights(int actualClassification, double[] weights, double[] x) {
         double[] newWeights = new double[weights.length];
         if (actualClassification == 1) //the angle is larger? than 90 degrees
-            newWeights = Utils.add1DVectors(weights, x);
+            newWeights = MatrixUtils.add1DVectors(weights, x);
         else
-            newWeights = Utils.subtract1DVectors(weights, x);
+            newWeights = MatrixUtils.subtract1DVectors(weights, x);
         return newWeights;
     }
 

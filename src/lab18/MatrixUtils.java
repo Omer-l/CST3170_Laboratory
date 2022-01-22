@@ -1,6 +1,6 @@
 package lab18;
 
-public class Utils {
+public class MatrixUtils {
 
     /**
      * Calculates the hypothesis
@@ -60,16 +60,16 @@ public class Utils {
 
     /**
      * Calculates the dot product of two vectors/points excludes x_0 and w_0 where x_0 = 1 and w_0 is 'b' or yIntercept
-     * @param vector1       is a vector/point
-     * @param vector2       is a vector/point
-     * @return              dot product of the given vectors
+     * @param augmentedVector1          is a vector/point
+     * @param augmentedVector2          is a vector/point
+     * @return                          dot product of the given vectors
      */
-    public static double getDotProductExcludeX0W0(double[] vector1, double[] vector2) {
+    public static double getDotProductExcludeX0W0(double[] augmentedVector1, double[] augmentedVector2) {
         double dotProduct = 0;
 
-        for(int vectorNumber = 1; vectorNumber < vector1.length && vectorNumber < vector2.length; vectorNumber++) {
-            double vectorPoint1 = vector1[vectorNumber];
-            double vectorPoint2 = vector2[vectorNumber];
+        for(int vectorNumber = 1; vectorNumber < augmentedVector1.length && vectorNumber < augmentedVector2.length; vectorNumber++) {
+            double vectorPoint1 = augmentedVector1[vectorNumber];
+            double vectorPoint2 = augmentedVector2[vectorNumber];
 
             dotProduct += (vectorPoint1 * vectorPoint2);
         }
@@ -115,5 +115,18 @@ public class Utils {
         double yIntercept = (-w0) / (w2); //-w0/w2
 
         System.out.println("y = " + gradient + "x" + " + " + yIntercept);
+    }
+
+    //The matrix of all possible inner products of X.
+    public static double[][] getGramMatrix(double[][] X) {
+        int numberOfRows = X.length;
+        double[][] result = new double[numberOfRows][numberOfRows];
+
+        for(int rowIndex = 0; rowIndex < numberOfRows; rowIndex++) {
+            for(int columnIndex = 1; columnIndex < numberOfRows; columnIndex++) {
+                result[rowIndex][columnIndex] = MatrixUtils.getDotProduct(X[columnIndex-1], X[columnIndex]);
+            }
+        }
+        return result;
     }
 }
