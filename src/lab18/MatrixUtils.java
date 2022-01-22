@@ -102,6 +102,58 @@ public class MatrixUtils {
         return result;
     }
 
+    /**
+     * Multiplies all numbers in a 1D vector by a
+     * @param vector    vector to find product of
+     * @param a         constant to multiply all elements in vector by
+     */
+    public static void multiplyVector(double[] vector, double a) {
+        for(int index = 0; index < vector.length; index++) {
+            double element = vector[index];
+            double product = element * a;
+            vector[index] = product;
+        }
+    }
+
+    /**
+     * Multiplies all numbers in a 1D vector by a
+     * @param vector1         is the vector to find product of
+     * @param vector2         is the vector to multiply vector1 with.
+     * @return                a 1D array of the products
+     */
+    public static double[] multiplyVector(double[] vector1, double[] vector2) {
+        double[] result = new double[vector1.length];
+
+        for(int index = 0; index < vector1.length; index++) {
+                double elementVector1 = vector1[index];
+                double elementVector2 = vector2[index];
+                double product = elementVector1 * elementVector2;
+                result[index] = product;
+        }
+        return result;
+    }
+
+    /**
+     * Computes the outer product of two vectors
+     * @param vector1   is 1D vector 1
+     * @param vector2   is 1D vector 2
+     * @return          a 2D array containing the outer product
+     */
+    public static double[][] getOuterProduct(double[] vector1, double[] vector2) {
+        double[][] result = new double[vector1.length][vector2.length];
+
+        for(int rowNumber = 0; rowNumber < vector1.length; rowNumber++) {
+            double rowElement = vector1[rowNumber];
+            for(int columnNumber = 0; columnNumber < vector2.length; columnNumber++) {
+                double outerElement = vector2[columnNumber];
+                double outerProduct = rowElement * outerElement;
+                result[rowNumber][columnNumber] = outerProduct;
+            }
+        }
+
+        return result;
+    }
+
     //Gives equation for 2D weights for a 2D graphs
     public static void printLineEquation(double[] weights) {
         //weights
@@ -117,15 +169,35 @@ public class MatrixUtils {
         System.out.println("y = " + gradient + "x" + " + " + yIntercept);
     }
 
-    //The matrix of all possible inner products of X.
-    public static double[][] getGramMatrix(double[][] X) {
-        int numberOfRows = X.length;
+    //The matrix of all possible inner products of augmentedX. And then multiplies each row by the classification.
+    public static double[][] getGramMatrix(double[][] augmentedX, double[] y) {
+
+        double[][] X = new double[augmentedX.length][augmentedX[0].length-1];
+        int numberOfRows = augmentedX.length;
         double[][] result = new double[numberOfRows][numberOfRows];
+        double[][] outerProductOfYY = getOuterProduct(y, y);
+
+        //turns augmented X into just X, so x0 = 1 is removed.
+        int iteratorIndex = 0;
+        for(double[] x : augmentedX) {
+            double[] pointFeatures = new double[augmentedX[0].length - 1];
+            for (int inputIndex = 1; inputIndex < X[0].length + 1; inputIndex++)
+                pointFeatures[inputIndex - 1] = x[inputIndex];
+            X[iteratorIndex++] = pointFeatures;
+        }
 
         for(int rowIndex = 0; rowIndex < numberOfRows; rowIndex++) {
-            for(int columnIndex = 1; columnIndex < numberOfRows; columnIndex++) {
-                result[rowIndex][columnIndex] = MatrixUtils.getDotProduct(X[columnIndex-1], X[columnIndex]);
+            double[] point = X[rowIndex];
+            double[] gramMatrixRow = new double[numberOfRows];
+            double[] outerProductYYRow = outerProductOfYY[rowIndex];
+            double classification = y[rowIndex];
+            for(int rowIndexIterator = 0, columnIndex = 0; rowIndexIterator < numberOfRows; rowIndexIterator++, columnIndex++) {
+                double[] nextPoint = X[rowIndexIterator];
+                double gram = MatrixUtils.getDotProduct(point, nextPoint);
+                gramMatrixRow[columnIndex] = gram;
             }
+            gramMatrixRow = multiplyVector(outerProductYYRow, gramMatrixRow);
+            result[rowIndex] = gramMatrixRow;
         }
         return result;
     }
