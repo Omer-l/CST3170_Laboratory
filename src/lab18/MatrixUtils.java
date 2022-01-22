@@ -240,4 +240,14 @@ public class MatrixUtils {
         }
         return result;
     }
+
+    /**
+     * function that returns the result of a dot product performed in another space
+     * @param vector1   is vector 1 to multiply
+     * @param vector2   is vector 2 that will be multiplied with vector 1
+     * @return
+     */
+    public static double linearKernel(double[] vector1, double[] vector2) {
+        return getDotProductExcludeX0W0(vector1, vector2);
+    }
 }

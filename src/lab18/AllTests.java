@@ -169,4 +169,18 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
         for(double[] zeros : zeros2D)
             System.out.println(Arrays.toString(zeros));
     }
+
+    @Test
+    public void quadraticProgramming() {
+        double[] weights = {-9.666666925153795, 0.44444453, 1.11111128};
+        MatrixUtils.printLineEquation(weights);
+    }
+
+    @Test
+    public void linearKernel() {
+        double[] vector1 = {3, 6};
+        double[] vector2 = {10, 10};
+
+        System.out.println(MatrixUtils.linearKernel(vector1, vector2));
+    }
 }
