@@ -1,7 +1,5 @@
 package lab18;
 
-import java.util.Arrays;
-
 public class ApplicationConvexOptimiserSVM {
 
     private static FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); //https://www.desmos.com/calculator/at8qwz5rsu
@@ -32,9 +30,15 @@ public class ApplicationConvexOptimiserSVM {
         double[] b = {0};
 
         //Inequality constraints
-        double[]
+        double[][] G = getG(numberOfRows);
+        double[] h = MatrixUtils.zeros(numberOfRows);
 
-        System.out.println(Arrays.toString(q));
+        //
+
+//        for(double[] zeros : G)
+//            System.out.println(Arrays.toString(zeros));
+//
+//        System.out.println(Arrays.toString(h));
     }
 
     //Gets all augmented features from allPoints
@@ -57,5 +61,20 @@ public class ApplicationConvexOptimiserSVM {
         }
 
         return classifications;
+    }
+
+    /**
+     * Gets G, a 2D array with -1s across the main diagonal
+     * @param numberOfRows  the number of rows
+     * @return              a 2D array with -1s across the main diagonal
+     */
+    public static double[][] getG(int numberOfRows) {
+        double[][] result = new double[numberOfRows][];
+
+        for(int i = 0; i < numberOfRows; i++)
+            result[i] = MatrixUtils.zeros(14);
+        MatrixUtils.mainDiagonalInsertion(result, -1);
+
+        return result;
     }
 }

@@ -25,10 +25,21 @@ public class MatrixUtils {
         double[] arrayOfZeros = new double[numberOfZeros];
 
         for(int index = 0; index < numberOfZeros; index++)
-            arrayOfZeros[index] = 1;
+            arrayOfZeros[index] = 0;
 
         return arrayOfZeros;
     }
+
+    /**
+     * Inserts a value into the main diagonal of the 2D array
+     * @param vector    is the 2 dimensional array
+     * @param value     is the value to insert into the main diagonal
+     */
+    public static void mainDiagonalInsertion(double[][] vector, double value) {
+        for(int row = 0, column = 0; row < vector.length && column < vector[row].length; row++, column++)
+            vector[row][column] = value;
+    }
+
 
     /**
      * Calculates the hypothesis

@@ -159,7 +159,14 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
     }
 
     @Test
-    public void diagonalInsertion() {
-//        double[] ones = MatrixUtils.ones()
+    public void mainDiagonalInsertion() {
+        double[][] zeros2D = new double[14][];
+
+        for(int i = 0; i < 14; i++)
+            zeros2D[i] = MatrixUtils.zeros(14);
+
+        MatrixUtils.mainDiagonalInsertion(zeros2D, -1);
+        for(double[] zeros : zeros2D)
+            System.out.println(Arrays.toString(zeros));
     }
 }
