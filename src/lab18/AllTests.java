@@ -150,4 +150,16 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
             System.out.println();
         }
     }
+
+    @Test
+    public void ones() {
+        double[] ones = MatrixUtils.ones(5);
+        MatrixUtils.multiplyVector(ones, -1);
+        System.out.println(Arrays.toString(ones));
+    }
+
+    @Test
+    public void diagonalInsertion() {
+//        double[] ones = MatrixUtils.ones()
+    }
 }

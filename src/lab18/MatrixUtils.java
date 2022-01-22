@@ -3,6 +3,34 @@ package lab18;
 public class MatrixUtils {
 
     /**
+     * Generates a 1D array of ones
+     * @param numberOfOnes  the size of the array
+     * @return              a single-dimensional array of ones
+     */
+    public static double[] ones(int numberOfOnes) {
+        double[] arrayOfOnes = new double[numberOfOnes];
+
+        for(int index = 0; index < numberOfOnes; index++)
+            arrayOfOnes[index] = 1;
+
+        return arrayOfOnes;
+    }
+
+    /**
+     * Generates a 1D array of zeros
+     * @param numberOfZeros     the size of the array
+     * @return                  a single-dimensional array of zeros
+     */
+    public static double[] zeros(int numberOfZeros) {
+        double[] arrayOfZeros = new double[numberOfZeros];
+
+        for(int index = 0; index < numberOfZeros; index++)
+            arrayOfZeros[index] = 1;
+
+        return arrayOfZeros;
+    }
+
+    /**
      * Calculates the hypothesis
      * @param augmentedVector           is the inputs, a augmentedVector on the graph where x0 = 1
      * @param gradient                  is the gradient, which is an augmentedVector, AKA weights for perceptron. w0 = yIntercept initially.
