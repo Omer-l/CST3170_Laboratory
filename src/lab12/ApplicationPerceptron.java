@@ -17,7 +17,6 @@ import java.util.Random;
 public class ApplicationPerceptron {
     private static FileReaderLab18 fileReader = new FileReaderLab18("lineClass1.txt");
     private static final PointLab18[] ALL_POINTS = fileReader.getData();
-    private static double[] weights;
     private static Random random = new Random(); //for testing purposes
     private static final int NUMBER_OF_FEATURES = ALL_POINTS[0].getFeatures().length; //x and y and y-intercept
 
@@ -26,15 +25,16 @@ public class ApplicationPerceptron {
         Perceptron[] p = new Perceptron[10];
         for(int i = 0; i < 10; i++) {
             double[][] augmentedX = initialiseX(); //augmented simply means x0 = 1.
-            int[] y = initialiseY(); //'A' = 1, 'B' = -1
+            double[] y = initialiseY(); //'A' = 1, 'B' = -1
 
             Perceptron perceptron1 = new Perceptron(augmentedX, y, 230764458418060108L, NUMBER_OF_FEATURES);
             perceptron1.perceptronLearningAlgorithm();
             p[i] = perceptron1;
         }
 
-        for(Perceptron perceptron : p)
+        for(Perceptron perceptron : p) {
             System.out.println(perceptron);
+        }
 //        Perceptron perceptron2 = new Perceptron(augmentedX, y, NUMBER_OF_FEATURES);
 //        perceptron2.perceptronLearningAlgorithm();
 //        printLineEquation(perceptron2.getWeights());
@@ -60,8 +60,8 @@ public class ApplicationPerceptron {
         return X;
     }
 
-    private static int[] initialiseY() {
-        int[] y = new int[ALL_POINTS.length];
+    private static double[] initialiseY() {
+        double[] y = new double[ALL_POINTS.length];
         for (int pointIndex = 0; pointIndex < ALL_POINTS.length; pointIndex++) {
             double classification = ALL_POINTS[pointIndex].getClassification();
             y[pointIndex] = (int)classification;

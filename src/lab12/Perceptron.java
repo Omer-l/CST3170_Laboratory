@@ -7,12 +7,12 @@ import java.util.Random;
 
 public class Perceptron {
     private double[][] X;
-    private int[] y;
+    private double[] y;
     private Random random = new Random(); //for testing purposes
     private final int numberOfFeatures;
     private double[] weights;
 
-    public Perceptron(double[][] X, int[] y, long seed, int numberOfFeatures) {
+    public Perceptron(double[][] X, double[] y, long seed, int numberOfFeatures) {
         this.X = X;
         this.y = y;
         this.random.setSeed(seed);
@@ -20,7 +20,7 @@ public class Perceptron {
         this.weights = randomiseWeights(5);
     }
     //no seed
-    public Perceptron(double[][] X, int[] y, int numberOfFeatures) {
+    public Perceptron(double[][] X, double[] y, int numberOfFeatures) {
         this.X = X;
         this.y = y;
         this.numberOfFeatures = numberOfFeatures;
@@ -37,7 +37,7 @@ public class Perceptron {
             System.out.println(Arrays.toString(misclassifiedExamples));
             int misclassifiedIndex = pickOneFrom(misclassifiedExamples); //chooses a random example.
             double[] x = X[misclassifiedIndex];
-            int actualClassification = y[misclassifiedIndex];
+            double actualClassification = y[misclassifiedIndex];
             weights = updateWeights(actualClassification, weights, x);
             System.out.println(Arrays.toString(weights));
             misclassifiedExamples = predict(X, y, weights); //indexes of misclassified
@@ -66,7 +66,7 @@ public class Perceptron {
         return hypothesis;
     }
 
-    public int[] predict(double[][] X, int[] y, double[] weights) {
+    public int[] predict(double[][] X, double[] y, double[] weights) {
         int[] predict = new int[X.length];
         int[] hypothesis = initialiseHypothesis(X, weights);
         System.out.println(Arrays.toString(hypothesis));
@@ -74,7 +74,7 @@ public class Perceptron {
         //get number of misclassified
         for (int predictionNumber = 0; predictionNumber < predict.length; predictionNumber++) {
             int prediction = hypothesis[predictionNumber];
-            int actual = y[predictionNumber];
+            double actual = y[predictionNumber];
 
             if (prediction != actual)
                 numberOfMisclassified++;
@@ -84,7 +84,7 @@ public class Perceptron {
         int[] misclassifiedIndexes = new int[numberOfMisclassified];
         for (int predictionNumber = 0, misclassifiedIndex = 0; predictionNumber < predict.length; predictionNumber++) {
             int prediction = hypothesis[predictionNumber];
-            int actual = y[predictionNumber];
+            double actual = y[predictionNumber];
 
             if (prediction != actual)
                 misclassifiedIndexes[misclassifiedIndex++] = predictionNumber;
@@ -98,7 +98,7 @@ public class Perceptron {
         return misclassifiedExamples[index];
     }
 
-    private double[] updateWeights(int actualClassification, double[] weights, double[] x) {
+    private double[] updateWeights(double actualClassification, double[] weights, double[] x) {
         double[] newWeights = new double[weights.length];
         if (actualClassification == 1) //the angle is larger? than 90 degrees
             newWeights = MatrixUtils.add1DVectors(weights, x);
