@@ -264,5 +264,18 @@ public class MatrixUtils {
      * @param desiredClass          the desired classification to turn into 1 in the classification array.
      * @return                      an array containing 1s for desiredClassification, -1 for other classifications
      */
-    public static double[] getBinaryClassification(double[] allClassifications, double desiredClass)
+    public static double[] getBinaryClassifications(double[] allClassifications, double desiredClass) {
+        int size = allClassifications.length;
+        double[] binaryClassifications = new double[size];
+
+        for(int index = 0; index < size; index++) {
+            int classification = (int)allClassifications[index];
+
+            if(classification == desiredClass)
+                binaryClassifications[index] = 1;
+            else
+                binaryClassifications[index] = -1;
+        }
+        return binaryClassifications;
+    }
 }

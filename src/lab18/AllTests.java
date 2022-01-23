@@ -187,4 +187,17 @@ FileReaderLab18 fileReader = new FileReaderLab18("lineClass1.txt"); //https://ww
         System.out.println("POLY KERNEL: " + MatrixUtils.polynomialKernel(vector1, vector2, 1));
         System.out.println("MY HYPOTHESIS:"+ MatrixUtils.getHypothesis(vector1, vector2));
     }
+
+    @Test
+    public void getBinaryClassifications() {
+        double[][] allPoints = {{1, 6},{1, 7},{2, 5},{2, 8},
+                {4, 2},{4, 3},{5, 1},{5, 2},{5, 3},{6, 1},{6, 2},{9, 4},{9, 7},{10, 5},{10, 6},{11, 6},{5, 9},{5, 10},{5, 11},{6, 9},{6, 10},{7, 10},{8, 11}};
+
+        double[] classifications = {1, 1, 1, 1,
+                2, 2, 2, 2, 2, 2, 2,
+                3, 3, 3, 3, 3,
+                4, 4, 4, 4, 4, 4, 4}; //for every point index, there is a classification.
+
+        System.out.println(Arrays.toString(MatrixUtils.getBinaryClassifications(classifications, 2)));
+    }
 }
