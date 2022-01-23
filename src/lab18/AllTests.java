@@ -181,6 +181,6 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
         double[] vector1 = {3, 6};
         double[] vector2 = {10, 10};
 
-        System.out.println(MatrixUtils.linearKernel(vector1, vector2));
+        System.out.println(MatrixUtils.polynomialKernel(vector1, vector2, 2));
     }
 }

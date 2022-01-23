@@ -247,7 +247,14 @@ public class MatrixUtils {
      * @param vector2   is vector 2 that will be multiplied with vector 1
      * @return
      */
-    public static double linearKernel(double[] vector1, double[] vector2) {
-        return getDotProductExcludeX0W0(vector1, vector2);
+    public static double polynomialKernel(double[] vector1, double[] vector2, int exponent) {
+        int d = vector1.length; //the number of iterations for the value inside the bracket
+        double kernel = 1;
+
+        for(int index = 0; index < d; index++) {
+            kernel += (vector1[index] * vector2[index]);
+        }
+
+        return Math.pow(kernel, 2);
     }
 }
