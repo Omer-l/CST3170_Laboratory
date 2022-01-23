@@ -2,7 +2,6 @@ package lab12;
 
 import lab18.MatrixUtils;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Perceptron {
@@ -31,15 +30,15 @@ public class Perceptron {
         double yIntercept = 5;
         weights = randomiseWeights(yIntercept);
         int[] misclassifiedExamples = predict(X, y, weights); //indexes of misclassified
-        System.out.println(Arrays.toString(weights));
+//        System.out.println(Arrays.toString(weights));
 
         while (misclassifiedExamples.length != 0) {
-            System.out.println(Arrays.toString(misclassifiedExamples));
+//            System.out.println(Arrays.toString(misclassifiedExamples));
             int misclassifiedIndex = pickOneFrom(misclassifiedExamples); //chooses a random example.
             double[] x = X[misclassifiedIndex];
             double actualClassification = y[misclassifiedIndex];
             weights = updateWeights(actualClassification, weights, x);
-            System.out.println(Arrays.toString(weights));
+//            System.out.println(Arrays.toString(weights));
             misclassifiedExamples = predict(X, y, weights); //indexes of misclassified
         }
 
@@ -69,7 +68,7 @@ public class Perceptron {
     public int[] predict(double[][] X, double[] y, double[] weights) {
         int[] predict = new int[X.length];
         int[] hypothesis = initialiseHypothesis(X, weights);
-        System.out.println(Arrays.toString(hypothesis));
+//        System.out.println(Arrays.toString(hypothesis));
         int numberOfMisclassified = 0;
         //get number of misclassified
         for (int predictionNumber = 0; predictionNumber < predict.length; predictionNumber++) {
@@ -117,5 +116,9 @@ public class Perceptron {
         for(double w : weights)
             result += w + ", \t";
         return result + " \t" + MatrixUtils.getLineEquation(weights);
+    }
+
+    public double[] getY() {
+        return y;
     }
 }

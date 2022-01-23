@@ -1,5 +1,7 @@
 package lab18;
 
+import java.util.Arrays;
+
 public class MatrixUtils {
 
     /**
@@ -49,8 +51,8 @@ public class MatrixUtils {
      */
     public static int getHypothesis(double[] augmentedVector, double[] gradient) {
         double dotProductOfWeightsAndVector = getDotProduct(augmentedVector, gradient);
-        double hypothesisResult = dotProductOfWeightsAndVector; //can also use polynomial kernel here with a degree of 1.
-        System.out.println(hypothesisResult);
+//        double hypothesisResult = dotProductOfWeightsAndVector; //can also use polynomial kernel here with a degree of 1.
+        double hypothesisResult = polynomialKernel(augmentedVector, gradient, 1); //can also use polynomial kernel here with a degree of 1.
         if(hypothesisResult >= 0)
             return 1;
         else
@@ -251,7 +253,7 @@ public class MatrixUtils {
         int numberOfIterations = vector1.length; //the number of iterations for the value inside the bracket
         double kernel = 0; //could be 1 to follow lecture vid on youtube.
 
-        for(int index = 0; index < numberOfIterations; index++) {
+        for(int index = 1; index < numberOfIterations; index++) { //starts from index 1 since it will be given an augmented x and w
             kernel += (vector1[index] * vector2[index]);
         }
 
@@ -277,5 +279,43 @@ public class MatrixUtils {
                 binaryClassifications[index] = -1;
         }
         return binaryClassifications;
+    }
+
+    /**
+     * Given an 2D array of different line weights, calculates the minimum geometric margin
+     * of each line and returns the line with the highest minimum geometric margin
+     * @param lineWeights       is a 2D array, where each index contains the weights for a line
+     * @return                  the weights for a line which has the maximum of the minimum geometric margin (I'm going to go mad)
+     */
+    public static double[] maximiseTheMinimumGeometricMargin(double[][] allPoints, double[][] lineWeights, double[] classifications) {
+        double maximumOfTheMinimumGeometricMargin = Double.MIN_VALUE;
+        int bestHyperplaneIndex = 0;
+        int numberOfLines = lineWeights.length;
+        int numberOfPoints = allPoints.length;
+        for(int lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
+            double[] weights = lineWeights[lineIndex];
+            int classification = (int) classifications[lineIndex];
+            double minimumGeometricMarginClass1 = Double.MAX_VALUE;
+            double minimumGeometricMarginClassMinus1 = Double.MAX_VALUE;
+            //get geometric margin from points to line
+            for (int pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
+                double[] currentPoint = allPoints[pointIndex];
+                double geometricMargin = getGeometricMargin(weights, currentPoint, classification);
+
+                if (classification == 1 && geometricMargin < minimumGeometricMarginClass1) {
+                    minimumGeometricMarginClass1 = geometricMargin;
+                } else if (classification == -1 && geometricMargin < minimumGeometricMarginClassMinus1) {
+                    minimumGeometricMarginClassMinus1 = geometricMargin;
+                }
+            }
+            double minimum = minimumGeometricMarginClass1 > minimumGeometricMarginClassMinus1 ? minimumGeometricMarginClassMinus1 : minimumGeometricMarginClass1;
+            if (minimum > maximumOfTheMinimumGeometricMargin) {
+                System.out.print("\nNEW HYPERPLANE AT: " + lineIndex + " BEING: " + Arrays.toString(lineWeights[lineIndex]) + " COMPARED TO PREVIOUSLY AT: " + bestHyperplaneIndex + " BEING: " + Arrays.toString(lineWeights[bestHyperplaneIndex]) + "\n");
+                maximumOfTheMinimumGeometricMargin = minimum;
+                bestHyperplaneIndex = lineIndex;
+            }
+        }
+
+        return lineWeights[bestHyperplaneIndex];
     }
 }
