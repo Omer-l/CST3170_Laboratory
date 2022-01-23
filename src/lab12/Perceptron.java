@@ -55,7 +55,7 @@ public class Perceptron {
         return weights;
     }
 
-    private int[] initialiseHypothesis(double[][] X, double[] weights) {
+    public static int[] initialiseHypothesis(double[][] X, double[] weights) {
         int[] hypothesis = new int[X.length];
 
         for (int pointNumber = 0; pointNumber < X.length; pointNumber++) {
@@ -66,7 +66,7 @@ public class Perceptron {
         return hypothesis;
     }
 
-    private int[] predict(double[][] X, int[] y, double[] weights) {
+    public int[] predict(double[][] X, int[] y, double[] weights) {
         int[] predict = new int[X.length];
         int[] hypothesis = initialiseHypothesis(X, weights);
         System.out.println(Arrays.toString(hypothesis));
@@ -109,5 +109,13 @@ public class Perceptron {
 
     public double[] getWeights() {
         return weights;
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        for(double w : weights)
+            result += w + ", \t";
+        return result + " \t" + MatrixUtils.getLineEquation(weights);
     }
 }

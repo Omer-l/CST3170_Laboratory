@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class AllTests {
     //    FileReaderLab18 fileReader = new FileReaderLab18("SVM_LineClass1.txt");
-FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); //https://www.desmos.com/calculator/at8qwz5rsu
+FileReaderLab18 fileReader = new FileReaderLab18("lineClass1.txt"); //https://www.desmos.com/calculator/at8qwz5rsu
 //    FileReaderLab18 fileReader = new FileReaderLab18("lineClass2.txt");
     PointLab18[] allPoints = fileReader.getData();
 //    PointLab18[] allPoints = {
@@ -67,18 +67,21 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
 //        double hyp2 = MatrixUtils.getHypothesis(v2, t);
 //        double[] gradient = {8.0, -5.414125490630429, 3.753651706274863}; //w0 = y-intercept
         double[][] lineWeights = {
-                {33.0, -1.414125490630429, -4.246348293725138}, //  y = -0.3330215500033507x + 7.771383249170672
-                {50.0, -2.414125490630429, -6.246348293725138}, //  y = -0.3864858917738504x + 8.00467691662795
-                {50.0, -1.4141254906304326, -6.246348293725138}, // y = -0.22639235344129197x + 8.00467691662795
-                {71.0, -3.4141254906304326, -8.246348293725138}, // y = -0.4140166494335838x + 8.60987160268573
-                {44.0, -1.414125490630429, -5.246348293725138}, //  y = -0.2695447216727462x + 8.386785919765549
-                {37.0, -1.4141254906304308, -4.246348293725138}, // y = -0.33302155000335115x + 8.713369097554995
-                {8, -0.4, -1}, //
+                {14.0, 	-6.414125490630429, 	3.753651706274863,   }, //   	y = 1.708769484368551x + -3.7297013936046954
+                {14.0, 	-9.414125490630429, 	4.753651706274863,   }, //   	y = 1.9803986645053735x + -2.9451042829915104
+                {17.0, 	-9.414125490630429, 	3.753651706274863,   }, //   	y = 2.5079912115695566x + -4.528923120805701
+                {5.0, 	-5.41412549063043, 	3.753651706274863, 	    }, //       y = 1.4423622419682156x + -1.3320362120016769
+                {9.0, 	-6.414125490630429, 	4.753651706274863,   }, //   	y = 1.3493048895786215x + -1.8932813247802567
+                {7.0, 	-2.41412549063043, 	0.7536517062748631,    }, //     	y = 3.203237610331872x + -9.288110066916031
+                {11.0, 	-7.414125490630429, 	4.753651706274863,   },//       y = 1.559669481220872x + -2.314010508064758
+                {11.0, 	-7.414125490630429, 	4.753651706274863,},    //      y = 1.7087694843685508x + -2.3976651816030183
+                {9.0, 	-6.414125490630429, 	3.753651706274863,},    //      y = 1.9803986645053735x + -2.9451042829915104
+                {14.0, 	-9.414125490630429, 	4.753651706274863,}     //      y = 1.7700340728631228x + -2.7347396913492594
           };
 
-        MatrixUtils.printLineEquation(lineWeights[lineWeights.length-1]);
+        MatrixUtils.getLineEquation(lineWeights[lineWeights.length-1]);
         double maximumOfTheMinimumFunctionalMargin = Double.MIN_VALUE;
-        int bestHyperplaneIndex = -1;
+        int bestHyperplaneIndex = 0;
         for (int lineIndex = 0; lineIndex < lineWeights.length; lineIndex++) {
             double[] gradient = lineWeights[lineIndex];
             double minimumFunctionalMarginClass1 = Double.MAX_VALUE;
@@ -90,7 +93,7 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
                 PointLab18 point = allPoints[pointIndex];
                 double[] feature = point.getFeatures();
                 double classificationa = point.getClassification();
-                double functionalMargin = MatrixUtils.getGeometricMargin(gradient, feature, classificationa);
+                double functionalMargin = Math.abs(MatrixUtils.getGeometricMargin(gradient, feature, classificationa));
 
                 if (classification == 1 && functionalMargin < minimumFunctionalMarginClass1) {
                     minimumFunctionalMarginClass1 = functionalMargin;
@@ -106,8 +109,8 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
                 bestHyperplaneIndex = lineIndex;
                 System.out.print("\nNEW HYPERPLANE INDX: " + bestHyperplaneIndex);
             }
-//            ApplicationPerceptron.printLineEquation(lineWeights[lineIndex]);
         }
+        System.out.println("\n" + MatrixUtils.getLineEquation(lineWeights[bestHyperplaneIndex]) + "INDEX: " + bestHyperplaneIndex);
     }
 
     @Test
@@ -173,7 +176,7 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
     @Test
     public void quadraticProgramming() {
         double[] weights = {-9.666666925153795, 0.44444453, 1.11111128};
-        MatrixUtils.printLineEquation(weights);
+        MatrixUtils.getLineEquation(weights);
     }
 
     @Test
@@ -181,6 +184,7 @@ FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt"); /
         double[] vector1 = {3, 6};
         double[] vector2 = {10, 10};
 
-        System.out.println(MatrixUtils.polynomialKernel(vector1, vector2, 2));
+        System.out.println("POLY KERNEL: " + MatrixUtils.polynomialKernel(vector1, vector2, 1));
+        System.out.println("MY HYPOTHESIS:"+ MatrixUtils.getHypothesis(vector1, vector2));
     }
 }

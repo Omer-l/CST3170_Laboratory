@@ -49,7 +49,7 @@ public class MatrixUtils {
      */
     public static int getHypothesis(double[] augmentedVector, double[] gradient) {
         double dotProductOfWeightsAndVector = getDotProduct(augmentedVector, gradient);
-        double hypothesisResult = dotProductOfWeightsAndVector;
+        double hypothesisResult = dotProductOfWeightsAndVector; //can also use polynomial kernel here with a degree of 1.
         System.out.println(hypothesisResult);
         if(hypothesisResult >= 0)
             return 1;
@@ -194,7 +194,7 @@ public class MatrixUtils {
     }
 
     //Gives equation for 2D weights for a 2D graphs
-    public static void printLineEquation(double[] weights) {
+    public static String getLineEquation(double[] weights) {
         //weights
         double w0 = weights[0];
         double w1 = weights[1];
@@ -205,7 +205,7 @@ public class MatrixUtils {
         //y-intercept
         double yIntercept = (-w0) / (w2); //-w0/w2
 
-        System.out.println("y = " + gradient + "x" + " + " + yIntercept);
+        return "y = " + gradient + "x" + " + " + yIntercept;
     }
 
     //The matrix of all possible inner products of augmentedX. And then multiplies each row by the classification.
@@ -247,14 +247,22 @@ public class MatrixUtils {
      * @param vector2   is vector 2 that will be multiplied with vector 1
      * @return
      */
-    public static double polynomialKernel(double[] vector1, double[] vector2, int exponent) {
-        int d = vector1.length; //the number of iterations for the value inside the bracket
-        double kernel = 1;
+    public static double polynomialKernel(double[] vector1, double[] vector2, int degree) {
+        int numberOfIterations = vector1.length; //the number of iterations for the value inside the bracket
+        double kernel = 0; //could be 1 to follow lecture vid on youtube.
 
-        for(int index = 0; index < d; index++) {
+        for(int index = 0; index < numberOfIterations; index++) {
             kernel += (vector1[index] * vector2[index]);
         }
 
-        return Math.pow(kernel, 2);
+        return Math.pow(kernel, degree);
     }
+
+    /**
+     * Transforms a classification array into -1 or 1, depending on the classification to keep as 1, if not classification, -1.
+     * @param allClassifications    the array containing all the classifications
+     * @param desiredClass          the desired classification to turn into 1 in the classification array.
+     * @return                      an array containing 1s for desiredClassification, -1 for other classifications
+     */
+    public static double[] getBinaryClassification(double[] allClassifications, double desiredClass)
 }

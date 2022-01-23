@@ -15,21 +15,26 @@ import java.util.Random;
  * https://www.desmos.com/calculator/ts5eefdf6p
  */
 public class ApplicationPerceptron {
-    private static FileReaderLab18 fileReader = new FileReaderLab18("LineClassSVM_Tutorial.txt");
+    private static FileReaderLab18 fileReader = new FileReaderLab18("lineClass1.txt");
     private static final PointLab18[] ALL_POINTS = fileReader.getData();
     private static double[] weights;
     private static Random random = new Random(); //for testing purposes
     private static final int NUMBER_OF_FEATURES = ALL_POINTS[0].getFeatures().length; //x and y and y-intercept
 
     public static void main(String[] args) {
-        random.setSeed(230764458418060108L); //always get the same randoms
-        double[][] augmentedX = initialiseX(); //augmented simply means x0 = 1.
-        int[] y = initialiseY(); //'A' = 1, 'B' = -1
+//        random.setSeed(230764458418060108L); //always get the same randoms
+        Perceptron[] p = new Perceptron[10];
+        for(int i = 0; i < 10; i++) {
+            double[][] augmentedX = initialiseX(); //augmented simply means x0 = 1.
+            int[] y = initialiseY(); //'A' = 1, 'B' = -1
 
-        Perceptron perceptron1 = new Perceptron(augmentedX, y, 230764458418060108L, NUMBER_OF_FEATURES);
-        perceptron1.perceptronLearningAlgorithm();
-        printLineEquation(perceptron1.getWeights());
+            Perceptron perceptron1 = new Perceptron(augmentedX, y, 230764458418060108L, NUMBER_OF_FEATURES);
+            perceptron1.perceptronLearningAlgorithm();
+            p[i] = perceptron1;
+        }
 
+        for(Perceptron perceptron : p)
+            System.out.println(perceptron);
 //        Perceptron perceptron2 = new Perceptron(augmentedX, y, NUMBER_OF_FEATURES);
 //        perceptron2.perceptronLearningAlgorithm();
 //        printLineEquation(perceptron2.getWeights());
