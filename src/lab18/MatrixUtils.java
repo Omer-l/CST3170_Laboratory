@@ -51,8 +51,8 @@ public class MatrixUtils {
      */
     public static int getHypothesis(double[] augmentedVector, double[] gradient) {
         double dotProductOfWeightsAndVector = getDotProduct(augmentedVector, gradient);
-//        double hypothesisResult = dotProductOfWeightsAndVector; //can also use polynomial kernel here with a degree of 1.
-        double hypothesisResult = polynomialKernel(augmentedVector, gradient, 1); //can also use polynomial kernel here with a degree of 1.
+        double hypothesisResult = dotProductOfWeightsAndVector; //can also use polynomial kernel here with a degree of 1.
+        System.out.println(hypothesisResult);
         if(hypothesisResult >= 0)
             return 1;
         else
@@ -166,10 +166,10 @@ public class MatrixUtils {
         double[] result = new double[vector1.length];
 
         for(int index = 0; index < vector1.length; index++) {
-                double elementVector1 = vector1[index];
-                double elementVector2 = vector2[index];
-                double product = elementVector1 * elementVector2;
-                result[index] = product;
+            double elementVector1 = vector1[index];
+            double elementVector2 = vector2[index];
+            double product = elementVector1 * elementVector2;
+            result[index] = product;
         }
         return result;
     }
@@ -253,7 +253,7 @@ public class MatrixUtils {
         int numberOfIterations = vector1.length; //the number of iterations for the value inside the bracket
         double kernel = 0; //could be 1 to follow lecture vid on youtube.
 
-        for(int index = 1; index < numberOfIterations; index++) { //starts from index 1 since it will be given an augmented x and w
+        for(int index = 0; index < numberOfIterations; index++) {
             kernel += (vector1[index] * vector2[index]);
         }
 

@@ -4,7 +4,7 @@ import lab12.Perceptron;
 
 public class ApplicationSVM4Classifications {
     private final static double[][] ALL_POINTS = {{1, 6},{1, 7},{2, 5},{2, 8},
-        {4, 2},{4, 3},{5, 1},{5, 2},{5, 3},{6, 1},{6, 2},{9, 4},{9, 7},{10, 5},{10, 6},{11, 6},{5, 9},{5, 10},{5, 11},{6, 9},{6, 10},{7, 10},{8, 11}};
+            {4, 2},{4, 3},{5, 1},{5, 2},{5, 3},{6, 1},{6, 2},{9, 4},{9, 7},{10, 5},{10, 6},{11, 6},{5, 9},{5, 10},{5, 11},{6, 9},{6, 10},{7, 10},{8, 11}};
     private final static int NUMBER_OF_LINES_ATTEMPTS_PER_CLASSIFICATION = 15;
     private final static int NUMBER_OF_CLASSIFICATIONS = 4;
     private static double[] classifications = {1, 1, 1, 1,
