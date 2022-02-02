@@ -2,19 +2,19 @@ package lab17;
 
 public class Application {
 	private final static int PERCENTAGE = 100;
-	private final static int bandit1 = 50;
+	private final static int bandit1Gain = 50;
 	private final static int percentageRequiredForBandit1ToGain = 90;
-	private final static int bandit2 = 5;
+	private final static int bandit2Gain = 5;
 	private final static int percentageRequiredForBandit2ToGain = 10;
 	private final static int indexOfGain = 0;
 	private final static int indexOfPercentage = 1;
-	private final static double expectedUtilityBandit1 = (double)bandit1 / (PERCENTAGE - (double)(percentageRequiredForBandit1ToGain));
-	private final static double expectedUtilityBandit2 = bandit2 - (double)bandit2 / (double)(percentageRequiredForBandit2ToGain);
+	private final static double expectedUtilityBandit1 = (double) bandit1Gain / (PERCENTAGE - (double)(percentageRequiredForBandit1ToGain));
+	private final static double expectedUtilityBandit2 = bandit2Gain - (double) bandit2Gain / (double)(percentageRequiredForBandit2ToGain);
 	private final static double[] expectedUtilties = {expectedUtilityBandit1, expectedUtilityBandit2};
 	//Holds bandit and probability of getting bandit
 	private final static int[][] bandits = {
-			{bandit1, percentageRequiredForBandit1ToGain}, 
-			{bandit2, percentageRequiredForBandit2ToGain},
+			{bandit1Gain, percentageRequiredForBandit1ToGain},
+			{bandit2Gain, percentageRequiredForBandit2ToGain},
 			};
 	private final static int numberOfBandits = bandits.length;
 	private final static int numberOfTurns = 2000;
@@ -69,7 +69,7 @@ public class Application {
 	private static void printGains(int[][] gains) {
 		for(int banditIndex = 0; banditIndex < gains.length; banditIndex++) {
 			int numberOfTimesBanditChosen = (gains[banditIndex][0]-1);
-			System.out.print("\nNumber of times chosen: " + numberOfTimesBanditChosen + " GAINS PER CHOSEN TIME: ");
+			System.out.print("\nNumber of times chosen: " + numberOfTimesBanditChosen + "... Gains each turn: ");
 			for(int gainIndex = 1; gainIndex < gains[0].length; gainIndex++) {
 				int gain = gains[banditIndex][gainIndex];
 				System.out.print(gain + ", ");
@@ -79,18 +79,6 @@ public class Application {
 			System.out.print("\n = " + totalGain);
 			System.out.print("... Actual Utility: "  + calculateUtilityForBandit(gains[banditIndex]) + ". Expected utility: " + expectedUtilityOfBandit);
 		}
-	}
-	
-	private static double[] calculateUtilityForAllBandits(int[][] gains) {
-		
-		double utilityOfEachBandit[] = new double[bandits.length];
-		for(int banditIndex = 0; banditIndex < gains.length; banditIndex++) {
-			int numberOfTimesBanditChosen = (gains[banditIndex][0]-1);
-			System.out.print("\nNumber of times chosen: " + numberOfTimesBanditChosen + " GAINS PER CHOSEN TIME: ");
-			int totalGain = getGain(gains[banditIndex]);
-		}
-		
-		return utilityOfEachBandit;
 	}
 	
 	private static double calculateUtilityForBandit(int[] gains) {
