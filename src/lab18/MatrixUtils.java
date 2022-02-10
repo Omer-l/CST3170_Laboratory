@@ -63,13 +63,14 @@ public class MatrixUtils {
      * Calculates the hypothesis with a zeta in the constraint for a soft margin.
      * @param augmentedVector           is the inputs, a augmentedVector on the graph where x0 = 1
      * @param gradient                  is the gradient, which is an augmentedVector, AKA weights for perceptron. w0 = yIntercept initially.
+     * @param zeta                      is the for soft margin classification
      * @return                          +1 if hypothesis is more than or equal to 0, otherwise returns -1
      */
-    public static int getHypothesisSoftMargin(double[] augmentedVector, double[] gradient, double zeta) {
-        double dotProductOfWeightsAndVector = getDotProduct(augmentedVector, gradient);
+    public static int getHypothesisSoftMargin(double[] augmentedVector, double[] gradient, double classification, double zeta) {
+        double dotProductOfWeightsAndVector = getGeometricMargin(gradient, augmentedVector, classification);
         double hypothesisResult = dotProductOfWeightsAndVector; //can also use polynomial kernel here with a degree of 1.
         System.out.println(hypothesisResult);
-        if(hypothesisResult - zeta >= 0)
+        if(hypothesisResult >= 0 - zeta)
             return 1;
         else
             return -1;
@@ -79,6 +80,7 @@ public class MatrixUtils {
      * The f. To determine how good the line of best fit of the classified data points is.
      * @param gradient              AKA the weights, the 'm'
      * @param augmentedVector       The augmented X, including x0 = 1, Note, this will not be necessary for this calculation
+     * @param classification        the y, the output, the classification
      * @return                      The functional margin points, the higher, the better.
      */
     public static double getGeometricMargin(double[] gradient, double[] augmentedVector, double classification) {

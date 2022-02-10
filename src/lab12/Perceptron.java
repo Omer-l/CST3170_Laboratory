@@ -54,12 +54,13 @@ public class Perceptron {
         return weights;
     }
 
-    public static int[] initialiseHypothesis(double[][] X, double[] weights) {
+    public int[] initialiseHypothesis(double[][] X, double[] weights) {
         int[] hypothesis = new int[X.length];
 
         for (int pointNumber = 0; pointNumber < X.length; pointNumber++) {
             double[] features = X[pointNumber];
             hypothesis[pointNumber] = MatrixUtils.getHypothesis(features, weights);
+//            hypothesis[pointNumber] = MatrixUtils.getHypothesisSoftMargin(features, weights, y[pointNumber], 0);
         }
 
         return hypothesis;
