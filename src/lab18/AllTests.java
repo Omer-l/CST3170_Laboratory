@@ -5,6 +5,23 @@ import org.junit.Test;
 import java.util.Arrays;
 
 public class AllTests {
+
+    @Test
+    public void testGeometricMargin() {
+
+        double[][] positive_x = {{1, 2,7},{1, 8,3},{1, 7,5},{1, 4,4},{1, 4,6},{1, 1,3},{1, 2,5},
+         {1, 8,7},{1, 4,10},{1, 9,7},{1, 7,10},{1, 9,6},{1, 4,8},{1, 10,10}};
+        double[] y = {1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1};
+        double b = 8;
+        double[] weights = {b, -0.4, -1};
+        for(int i = 0; i < positive_x.length; i++) {
+            double[] x = positive_x[i];
+            double classification = y[i];
+            double margin = MatrixUtils.getGeometricMargin(weights, x, classification);
+            System.out.println(margin);
+        }
+
+    }
     //    FileReaderLab18 fileReader = new FileReaderLab18("SVM_LineClass1.txt");
 FileReaderLab18 fileReader = new FileReaderLab18("lineClass1.txt"); //https://www.desmos.com/calculator/at8qwz5rsu
 //    FileReaderLab18 fileReader = new FileReaderLab18("lineClass2.txt");
@@ -219,5 +236,10 @@ FileReaderLab18 fileReader = new FileReaderLab18("lineClass1.txt"); //https://ww
         double softMargin = MatrixUtils.getHypothesisSoftMargin(gradient, point, -1, 2);
         System.out.println("HARD: " + hardMargin);
         System.out.println("SOFT: " + softMargin);
+    }
+
+    @Test
+    public void getMaximumGeometricMargin() {
+//        double
     }
 }

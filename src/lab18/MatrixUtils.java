@@ -1,5 +1,7 @@
 package lab18;
 
+import lab12.Perceptron;
+
 import java.util.Arrays;
 
 public class MatrixUtils {
@@ -42,7 +44,6 @@ public class MatrixUtils {
             vector[row][column] = value;
     }
 
-
     /**
      * Calculates the hypothesis
      * @param augmentedVector           is the inputs, a augmentedVector on the graph where x0 = 1
@@ -50,7 +51,23 @@ public class MatrixUtils {
      * @return                          +1 if hypothesis is more than or equal to 0, otherwise returns -1
      */
     public static int getHypothesis(double[] augmentedVector, double[] gradient) {
-        double dotProductOfWeightsAndVector = getDotProduct(augmentedVector, gradient);
+        double dotProductOfWeightsAndVector = getDotProduct(gradient, augmentedVector);
+        double hypothesisResult = dotProductOfWeightsAndVector; //can also use polynomial kernel here with a degree of 1.
+        System.out.println(hypothesisResult);
+        if(hypothesisResult >= 0)
+            return 1;
+        else
+            return -1;
+    }
+
+    /**
+     * Calculates the hypothesis
+     * @param augmentedVector           is the inputs, a augmentedVector on the graph where x0 = 1
+     * @param gradient                  is the gradient, which is an augmentedVector, AKA weights for perceptron. w0 = yIntercept initially.
+     * @return                          +1 if hypothesis is more than or equal to 0, otherwise returns -1
+     */
+    public static int getHypothesis(double[] augmentedVector, double[] gradient, double classification) {
+        double dotProductOfWeightsAndVector = getGeometricMargin(gradient, augmentedVector, classification);
         double hypothesisResult = dotProductOfWeightsAndVector; //can also use polynomial kernel here with a degree of 1.
         System.out.println(hypothesisResult);
         if(hypothesisResult >= 0)
@@ -84,6 +101,7 @@ public class MatrixUtils {
      * @return                      The functional margin points, the higher, the better.
      */
     public static double getGeometricMargin(double[] gradient, double[] augmentedVector, double classification) {
+        System.out.println("WEIGHTS: " + Arrays.toString(gradient) + " ... " + "VECTOR: " + Arrays.toString(augmentedVector));
         double b = gradient[0];
         double dotProductOfWeightsAndVector = getDotProductExcludeX0W0(augmentedVector, gradient);
         return (classification / getMagnitudeOrUnitNormalVector(gradient)) * (dotProductOfWeightsAndVector + b);
@@ -119,18 +137,17 @@ public class MatrixUtils {
 
     /**
      * Calculates the dot product of two vectors/points excludes x_0 and w_0 where x_0 = 1 and w_0 is 'b' or yIntercept
-     * @param augmentedVector1          is a vector/point
-     * @param augmentedVector2          is a vector/point
-     * @return                          dot product of the given vectors
+     * @param weights           is the weights
+     * @param vector            is a vector/point
+     * @return                  dot product of the given vectors
      */
-    public static double getDotProductExcludeX0W0(double[] augmentedVector1, double[] augmentedVector2) {
+    public static double getDotProductExcludeX0W0(double[] weights, double[] vector) {
         double dotProduct = 0;
 
-        for(int vectorNumber = 1; vectorNumber < augmentedVector1.length && vectorNumber < augmentedVector2.length; vectorNumber++) {
-            double vectorPoint1 = augmentedVector1[vectorNumber];
-            double vectorPoint2 = augmentedVector2[vectorNumber];
-
-            dotProduct += (vectorPoint1 * vectorPoint2);
+        for(int vectorNumber = 1; vectorNumber < weights.length && vectorNumber < vector.length; vectorNumber++) {
+            double weight = weights[vectorNumber];
+            double vectorPoint2 = vector[vectorNumber];
+            dotProduct += (weight * vectorPoint2);
         }
         return dotProduct;
     }
@@ -302,38 +319,85 @@ public class MatrixUtils {
     /**
      * Given an 2D array of different line weights, calculates the minimum geometric margin
      * of each line and returns the line with the highest minimum geometric margin
-     * @param lineWeights       is a 2D array, where each index contains the weights for a line
+//     * @param lineWeights       is a 2D array, where each index contains the weights for a line
      * @return                  the weights for a line which has the maximum of the minimum geometric margin (I'm going to go mad)
      */
-    public static double[] maximiseTheMinimumGeometricMargin(double[][] allPoints, double[][] lineWeights, double[] classifications) {
-        double maximumOfTheMinimumGeometricMargin = Double.MIN_VALUE;
+    public static Perceptron maximiseTheMinimumGeometricMargin(Perceptron[] perceptrons) {
+        double maximumOfTheMinimumGeometricMargin = Double.MAX_VALUE;
         int bestHyperplaneIndex = 0;
-        int numberOfLines = lineWeights.length;
-        int numberOfPoints = allPoints.length;
-        for(int lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
-            double[] weights = lineWeights[lineIndex];
-            int classification = (int) classifications[lineIndex];
+        Perceptron bestHyperPlane = perceptrons[bestHyperplaneIndex]; // possibly the temporary best
+        double[][] weightsOfAllPerceptrons = getWeightsOfPerceptrons(perceptrons);
+        double[][] vectorsOfAllPerceptrons = perceptrons[0].getX();
+        double[] classificationsOfPerceptrons = perceptrons[0].getY();
+
+        int numberOfLines = weightsOfAllPerceptrons.length;
+        int numberOfVectors = vectorsOfAllPerceptrons.length;
+
+        for(int perceptronIndex = 0; perceptronIndex < numberOfLines; perceptronIndex++) {
+            double[] weightsOfLine = weightsOfAllPerceptrons[perceptronIndex];
             double minimumGeometricMarginClass1 = Double.MAX_VALUE;
             double minimumGeometricMarginClassMinus1 = Double.MAX_VALUE;
-            //get geometric margin from points to line
-            for (int pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
-                double[] currentPoint = allPoints[pointIndex];
-                double geometricMargin = getGeometricMargin(weights, currentPoint, classification);
+            //Get geometric margin from points to line, choose minimum margin
+            for(int vectorIndex = 0; vectorIndex < numberOfVectors; vectorIndex++) {
+                double[] currentVector = vectorsOfAllPerceptrons[vectorIndex];
+                double classification = classificationsOfPerceptrons[vectorIndex];
+                double geometricMargin = getGeometricMargin(weightsOfLine, currentVector, classification);
 
-                if (classification == 1 && geometricMargin < minimumGeometricMarginClass1) {
+                if(classification == 1 && geometricMargin < minimumGeometricMarginClass1)
                     minimumGeometricMarginClass1 = geometricMargin;
-                } else if (classification == -1 && geometricMargin < minimumGeometricMarginClassMinus1) {
+                else if(classification == -1 && geometricMargin < minimumGeometricMarginClassMinus1)
                     minimumGeometricMarginClassMinus1 = geometricMargin;
-                }
             }
-            double minimum = minimumGeometricMarginClass1 > minimumGeometricMarginClassMinus1 ? minimumGeometricMarginClassMinus1 : minimumGeometricMarginClass1;
-            if (minimum > maximumOfTheMinimumGeometricMargin) {
-                System.out.print("\nNEW HYPERPLANE AT: " + lineIndex + " BEING: " + Arrays.toString(lineWeights[lineIndex]) + " COMPARED TO PREVIOUSLY AT: " + bestHyperplaneIndex + " BEING: " + Arrays.toString(lineWeights[bestHyperplaneIndex]) + "\n");
-                maximumOfTheMinimumGeometricMargin = minimum;
-                bestHyperplaneIndex = lineIndex;
+            //The shorter margin is chosen
+            double minimumOfTheTwoClassMargins = minimumGeometricMarginClass1 > minimumGeometricMarginClassMinus1 ? minimumGeometricMarginClassMinus1 : minimumGeometricMarginClass1;
+
+            if(minimumOfTheTwoClassMargins > maximumOfTheMinimumGeometricMargin) {
+                maximumOfTheMinimumGeometricMargin = minimumOfTheTwoClassMargins;
+                bestHyperPlane = perceptrons[perceptronIndex];
             }
         }
 
-        return lineWeights[bestHyperplaneIndex];
+        //        double maximumOfTheMinimumGeometricMargin = Double.MIN_VALUE;
+//        int bestHyperplaneIndex = 0;
+//        int numberOfLines = lineWeights.length;
+//        int numberOfPoints = allPoints.length;
+//        for(int lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
+//            double[] weights = lineWeights[lineIndex];
+//            int classification = (int) classifications[lineIndex];
+//            double minimumGeometricMarginClass1 = Double.MAX_VALUE;
+//            double minimumGeometricMarginClassMinus1 = Double.MAX_VALUE;
+//            //get geometric margin from points to line
+//            for (int pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
+//                double[] currentPoint = allPoints[pointIndex];
+//                double geometricMargin = getGeometricMargin(weights, currentPoint, classification);
+//
+//                if (classification == 1 && geometricMargin < minimumGeometricMarginClass1) {
+//                    minimumGeometricMarginClass1 = geometricMargin;
+//                } else if (classification == -1 && geometricMargin < minimumGeometricMarginClassMinus1) {
+//                    minimumGeometricMarginClassMinus1 = geometricMargin;
+//                }
+//            }
+//            double minimum = minimumGeometricMarginClass1 > minimumGeometricMarginClassMinus1 ? minimumGeometricMarginClassMinus1 : minimumGeometricMarginClass1;
+//            if (minimum > maximumOfTheMinimumGeometricMargin) {
+//                System.out.print("\nNEW HYPERPLANE AT: " + lineIndex + " BEING: " + Arrays.toString(lineWeights[lineIndex]) + " COMPARED TO PREVIOUSLY AT: " + bestHyperplaneIndex + " BEING: " + Arrays.toString(lineWeights[bestHyperplaneIndex]) + "\n");
+//                maximumOfTheMinimumGeometricMargin = minimum;
+//                bestHyperplaneIndex = lineIndex;
+//            }
+//        }
+//
+//        return lineWeights[bestHyperplaneIndex];
+
+        return bestHyperPlane;
     }
+
+    //Get weights of all given perceptrons into a 2D array
+    private static double[][] getWeightsOfPerceptrons(Perceptron[] perceptrons) {
+        double[][] weightsOfAllPerceptrons = new double[perceptrons.length][];
+        for(int perceptronIndex = 0; perceptronIndex < perceptrons.length; perceptronIndex++) {
+            double[] weightOfPerceptron = perceptrons[perceptronIndex].getWeights();
+            weightsOfAllPerceptrons[perceptronIndex] = weightOfPerceptron;
+        }
+        return weightsOfAllPerceptrons;
+    }
+
 }

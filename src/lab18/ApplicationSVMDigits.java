@@ -10,7 +10,7 @@ public class ApplicationSVMDigits {
     private static FileReaderLab18 fileReader = new FileReaderLab18("test.txt");
     private static final PointLab18[] ALL_POINTS = fileReader.getData();
     private static Random random = new Random(); //for testing purposes
-    private static final int NUMBER_OF_FEATURES = ALL_POINTS[0].getFeatures().length; //x and y and y-intercept
+    private static final int NUMBER_OF_FEATURES = ALL_POINTS[0].getFeatures().length - 1; //x and y and y-intercept
     private final static int NUMBER_OF_LINES_ATTEMPTS_PER_CLASSIFICATION = 1;
     private final static int NUMBER_OF_CLASSIFICATIONS = 10;
     private final static double[][] augmentedX = initialiseX(ALL_POINTS);
@@ -20,7 +20,7 @@ public class ApplicationSVMDigits {
     /*test file */
     private static FileReaderLab18 fileReaderTest = new FileReaderLab18("rsc.txt");
     private static final PointLab18[] ALL_POINTS_TEST = fileReaderTest.getData();
-    private final static double[][] augmentedTestX = initialiseX(ALL_POINTS_TEST);
+    private static double[][] augmentedTestX = initialiseX(ALL_POINTS_TEST);
     private final static double[] testClassifications = initialiseY(ALL_POINTS_TEST);
     /*
 2.0, 	0.7920959434057914, 	0.3258955282744673, 	-14.154968713012984, 	19.713065654008766, 	-93.72180818777761, 	-48.77724679285528, 	-5.112634127698058, 	0.41763388175762806, 	0.934727724968944, 	-28.482463525850346, 	40.491041615711715, 	20.09792536557856, 	23.975447755759305, 	22.43758463762188, 	-22.33893194168347, 	-4.629410958404408, 	0.4495866298564495, 	27.048585668502056, 	28.466802581497475, 	-23.810939807686815, 	-32.848846902917245, 	41.18241551339801, 	-5.078791042773137, 	-3.2452393262834702, 	0.15463344014159153, 	27.77433339462634, 	22.794168150715876, 	-101.32187566754456, 	-86.86440734562126, 	48.95282578753958, 	44.23365156487225, 	0.09260362899719299, 	0.38562790996333307, 	7.577929694361956, 	45.5851677902498, 	-102.83202328180808, 	-147.03664502903212, 	-78.69234381728091, 	75.59774607475823, 	0.7436888437621935, 	0.7365852206268448, 	-10.312826827419673, 	75.28382091919124, 	-75.39137444677456, 	-115.83442278117391, 	-50.79830366043561, 	21.060733614816584, 	0.29062969302049046, 	0.5532234142093283, 	-28.288424597271387, 	3.4431688980083877, 	57.0872378057133, 	51.145259093531905, 	19.19685235035385, 	-26.52130467173245, 	-1.5314738046590453, 	0.9020575604985621, 	0.2786077169032013, 	-58.67731953632254, 	-19.086380069388305, 	-43.01669853521936, 	-34.444300840458915, 	-12.165796791868196, 	-0.29566628965212616, 	 	y = -2.4305210556270436x + -6.1369360009003
@@ -36,6 +36,7 @@ public class ApplicationSVMDigits {
 
      */
     public static void main(String[] args) {
+        augmentedTestX = Perceptron.augmentX(augmentedTestX, NUMBER_OF_FEATURES + 1);
         Perceptron[][] perceptrons2D = new Perceptron[NUMBER_OF_CLASSIFICATIONS][NUMBER_OF_LINES_ATTEMPTS_PER_CLASSIFICATION];
 //        double[][] perceptrons2D = new double[NUMBER_OF_CLASSIFICATIONS][NUMBER_OF_LINES_ATTEMPTS_PER_CLASSIFICATION];
 

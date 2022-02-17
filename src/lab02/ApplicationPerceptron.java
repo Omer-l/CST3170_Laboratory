@@ -23,11 +23,11 @@ public class ApplicationPerceptron {
     private static double[] weights;
     private static Random random = new Random(); //for testing purposes
     private static final int NUMBER_OF_FEATURES = ALL_POINTS[0].getFeatures().length; //x and y and y-intercept
-
+    private static int[] y;
     public static void main(String[] args) {
         random.setSeed(230764458418060108L); //always get the same randoms
         double[][] augmentedX = initialiseX(); //augmented simply means x0 = 1.
-        int[] y = initialiseY(); //'A' = 1, 'B' = -1
+        y = initialiseY(); //'A' = 1, 'B' = -1
         System.out.println(Arrays.deepToString(augmentedX) + "\n" + Arrays.toString(y));
         perceptronLearningAlgorithm(augmentedX, y);
     }
@@ -88,7 +88,8 @@ public class ApplicationPerceptron {
 
         for (int pointNumber = 0; pointNumber < X.length; pointNumber++) {
             double[] features = X[pointNumber];
-            hypothesis[pointNumber] = MatrixUtils.getHypothesis(features, weights);
+            double classification = y[pointNumber];
+            hypothesis[pointNumber] = MatrixUtils.getHypothesis(features, weights, classification);
         }
 
         return hypothesis;

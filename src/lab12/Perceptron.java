@@ -12,18 +12,37 @@ public class Perceptron {
     private double[] weights;
 
     public Perceptron(double[][] X, double[] y, long seed, int numberOfFeatures) {
-        this.X = X;
+        this.numberOfFeatures = numberOfFeatures + 1;
+        this.X = augmentX(X, this.numberOfFeatures);
         this.y = y;
         this.random.setSeed(seed);
-        this.numberOfFeatures = numberOfFeatures;
         this.weights = randomiseWeights(5);
     }
     //no seed
     public Perceptron(double[][] X, double[] y, int numberOfFeatures) {
-        this.X = X;
+        this.numberOfFeatures = numberOfFeatures + 1;
+        this.X = augmentX(X, this.numberOfFeatures);
         this.y = y;
-        this.numberOfFeatures = numberOfFeatures;
         this.weights = randomiseWeights(5);
+    }
+
+
+    /**
+     * Augments the vectors, the inputs, the x and y by making x0 = 1
+     * @param X     the vector to augment
+     * @return      an augmented vector, for which x0 = 1
+     */
+    public static double[][] augmentX(double[][] X, int numberOfFeatures) {
+        double[][] augmentedX = new double[X.length][numberOfFeatures];
+        for (int pointIndex = 0; pointIndex < augmentedX.length; pointIndex++) {
+            double[] currentPoint = X[pointIndex];
+            augmentedX[pointIndex][0] = 1;
+            for (int featureIndex = 0; featureIndex < currentPoint.length; featureIndex++) {
+                double feature = currentPoint[featureIndex];
+                augmentedX[pointIndex][featureIndex+1] = feature;
+            }
+        }
+        return augmentedX;
     }
 
     public void perceptronLearningAlgorithm() {
@@ -121,5 +140,17 @@ public class Perceptron {
 
     public double[] getY() {
         return y;
+    }
+
+    public double[][] getX() {
+        return X;
+    }
+
+    public void setX(double[][] x) {
+        X = x;
+    }
+
+    public void setY(double[] y) {
+        this.y = y;
     }
 }

@@ -33,10 +33,10 @@ public class FileReaderLab18 extends MyFileReader{
 				//assigns the features
 				int numberOfFeatures = bits.length; //x0 = 1, x1 = x, x2 = y
 				double[] features = new double[numberOfFeatures];
-				features[0] = 1; //augmented inputs, where x0 = 1, and w0 = y-intercept
+//				features[0] = 1; //augmented inputs, where x0 = 1, and w0 = y-intercept
 				for(int  featureNumber = 0; featureNumber < bits.length - 1; featureNumber++) {
 					double feature = Double.parseDouble(bits[featureNumber]);
-					features[featureNumber + 1] = feature;
+					features[featureNumber] = feature;
 				}
 
 				//assigns the classification, the last column
